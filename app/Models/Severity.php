@@ -7,4 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Severity extends Model
 {
     protected $guarded = [];
+
+    public function incidents()
+    {
+        return $this->hasMany(Incident::class);
+    }
 }

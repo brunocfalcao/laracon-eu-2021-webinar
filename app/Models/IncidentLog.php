@@ -9,4 +9,14 @@ class IncidentLog extends Model
     protected $guarded = [];
 
     protected $table = 'incidents_logs';
+
+    public function actionType()
+    {
+        return $this->belongsTo(ActionType::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

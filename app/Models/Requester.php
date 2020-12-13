@@ -10,4 +10,6 @@ class Requester extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    protected $table = 'requesters';
 }

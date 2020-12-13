@@ -39,13 +39,15 @@ class CreateHelpdeskSchema extends Migration
             $table->id();
 
             $table->foreignId('action_type_id')
+                  ->constrained()
                   ->comment('Type of incident action (open, assigned, reassigned, closed)');
+
+            $table->foreignId('user_id')
+                  ->constrained()
+                  ->comment('The related user id that triggered this action');
 
             $table->string('description')
                   ->comment('Computed description given the action type');
-
-            $table->foreignId('user_id')
-                  ->comment('The related user id that triggered this action');
 
             $table->engine = 'InnoDB';
             $table->timestamps();
@@ -91,7 +93,7 @@ class CreateHelpdeskSchema extends Migration
             $table->timestamps();
         });
 
-        Schema::create('requester', function (Blueprint $table) {
+        Schema::create('requesters', function (Blueprint $table) {
             $table->id();
 
             $table->string('name');
@@ -129,6 +131,16 @@ class CreateHelpdeskSchema extends Migration
         Schema::create('incidents', function (Blueprint $table) {
             $table->id();
 
+            $table->foreignId('user_id')
+                  ->constrained()
+                  ->comment('Current operator related assignment')
+                  ->nullable();
+
+            $table->foreignId('requester_id')
+                  ->constrained()
+                  ->comment('Current requested related assignment')
+                  ->nullable();
+
             $table->string('title')
                   ->comment('The incident title, short problem description');
 
@@ -160,6 +172,23 @@ class CreateHelpdeskSchema extends Migration
 
             $table->timestamps();
             $table->softDeletes();
+        });
+
+        Schema::create('incident_requester', function (Blueprint $table) {
+            $table->id();
+
+            $table->foreignId('requester_id');
+            $table->foreignId('incident_id');
+
+            $table->engine = 'InnoDB';
+            $table->timestamps();
+        });
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreignId('profile_id')
+                  ->after('id')
+                  ->nullable()
+                  ->constrained();
         });
     }
 
