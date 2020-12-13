@@ -4,8 +4,10 @@ namespace Database\Seeders;
 
 use App\Models\ActionType;
 use App\Models\Category;
+use App\Models\Incident;
 use App\Models\Priority;
 use App\Models\Profile;
+use App\Models\Requester;
 use App\Models\Severity;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -58,6 +60,27 @@ class DatabaseSeeder extends Seeder
                      });
 
         User::whereNull('profile_id')
-            ->update(['profile_id' => Profile::firstWhere('name', 'Admin')->id]);
+            ->update(['profile_id' => Profile::firstWhere('name', 'Non-Admin')->id]);
+
+
+        Requester::factory()->count(50)->create();
+
+        /**
+         * Create incident workflows. Each incident can have different workflow types.
+         *
+         * 1. The non-assigned incident.
+         * 2. The assigned incident.
+         * 3. The assigned and reassigned incident.
+         * 4. The assigned and closed incident.
+         * 5. The assigned, reassigned, and closed incident.
+         * 6. The assigned, closed and reopened incident.
+         * 7. The assigned, reassigned, closed and reopened incident.
+         *
+         * Each incident workflow should have a natural timming order separated
+         * by a randomly 120 hours period (0 hours to 5 days max).
+         *
+         */
+
+        $incident = new Incident();
     }
 }

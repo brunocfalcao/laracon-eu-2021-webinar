@@ -8,7 +8,7 @@ class IncidentLog extends Model
 {
     protected $guarded = [];
 
-    protected $table = 'incidents_logs';
+    protected $table = 'incident_logs';
 
     public function actionType()
     {

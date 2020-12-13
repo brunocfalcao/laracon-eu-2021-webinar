@@ -35,8 +35,10 @@ class CreateHelpdeskSchema extends Migration
             $table->timestamps();
         });
 
-        Schema::create('incidents_logs', function (Blueprint $table) {
+        Schema::create('incident_logs', function (Blueprint $table) {
             $table->id();
+
+            $table->foreignId('incident_id');
 
             $table->foreignId('action_type_id')
                   ->constrained()
