@@ -2,13 +2,13 @@
 
 namespace Database\Seeders;
 
-use App\Models\ActionType;
 use App\Models\Category;
 use App\Models\Incident;
 use App\Models\Priority;
 use App\Models\Profile;
 use App\Models\Requester;
 use App\Models\Severity;
+use App\Models\Status;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -39,11 +39,10 @@ class DatabaseSeeder extends Seeder
         Severity::create(['name' => 'Critical']);
         Severity::create(['name' => 'Disruptive']);
 
-        ActionType::create(['name' => 'new']);
-        ActionType::create(['name' => 'update']);
-        ActionType::create(['name' => 'assign']);
-        ActionType::create(['name' => 'close']);
-        ActionType::create(['name' => 'reopen']);
+        Status::create(['name' => 'New']);
+        Status::create(['name' => 'Assigned']);
+        Status::create(['name' => 'Closed']);
+        Status::create(['name' => 'Reopened']);
 
         User::factory(rand(10, 20))->create();
 
@@ -54,14 +53,13 @@ class DatabaseSeeder extends Seeder
                      ->shuffle()
                      ->take($admins)
                      ->each(function ($user) {
-                        $user->profile()
+                         $user->profile()
                              ->associate(Profile::firstWhere('name', 'Admin'))
                              ->save();
                      });
 
         User::whereNull('profile_id')
             ->update(['profile_id' => Profile::firstWhere('name', 'Non-Admin')->id]);
-
 
         Requester::factory()->count(50)->create();
 
@@ -78,9 +76,22 @@ class DatabaseSeeder extends Seeder
          *
          * Each incident workflow should have a natural timming order separated
          * by a randomly 120 hours period (0 hours to 5 days max).
-         *
          */
+        $faker = \Faker\Factory::create();
 
         $incident = new Incident();
+        $incident->requester()->associate(Requester::find(1));
+        $incident->title = $faker->sentence();
+        $incident->description = $faker->paragraph();
+        $incident->save();
+
+        $incident->user_id = 2;
+        $incident->save();
+
+        $incident->user_id = 4;
+        $incident->save();
+
+        $incident->title = 'My title was changed';
+        $incident->save();
     }
 }

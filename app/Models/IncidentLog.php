@@ -10,9 +10,9 @@ class IncidentLog extends Model
 
     protected $table = 'incident_logs';
 
-    public function actionType()
+    public function status()
     {
-        return $this->belongsTo(ActionType::class);
+        return $this->belongsTo(Status::class);
     }
 
     public function user()

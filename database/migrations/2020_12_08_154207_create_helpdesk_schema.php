@@ -26,7 +26,7 @@ class CreateHelpdeskSchema extends Migration
         });
         */
 
-        Schema::create('action_types', function (Blueprint $table) {
+        Schema::create('statuses', function (Blueprint $table) {
             $table->id();
 
             $table->string('name');
@@ -40,12 +40,16 @@ class CreateHelpdeskSchema extends Migration
 
             $table->foreignId('incident_id');
 
+            $table->unsignedBigInteger('status_id');
+
+            $table->foreign('status_id')->references('id')->on('action_types');
+
             $table->foreignId('action_type_id')
                   ->constrained()
                   ->comment('Type of incident action (open, assigned, reassigned, closed)');
 
             $table->foreignId('user_id')
-                  ->constrained()
+                  ->nullable()
                   ->comment('The related user id that triggered this action');
 
             $table->string('description')
@@ -134,23 +138,22 @@ class CreateHelpdeskSchema extends Migration
             $table->id();
 
             $table->foreignId('user_id')
+                  ->nullable()
                   ->constrained()
-                  ->comment('Current operator related assignment')
-                  ->nullable();
+                  ->comment('Current operator related assignment');
 
             $table->foreignId('requester_id')
                   ->constrained()
                   ->comment('Current requested related assignment')
                   ->nullable();
 
+            $table->unsignedBigInteger('status_id')
+                  ->default(1);
+
+            $table->foreign('status_id')->references('id')->on('action_types');
+
             $table->string('title')
                   ->comment('The incident title, short problem description');
-
-            $table->string('name')
-                  ->comment('The user name that created the incident');
-
-            $table->string('email')
-                  ->comment('The user email that created the incident');
 
             $table->longtext('description')
                   ->comment('The incident detailed issue');

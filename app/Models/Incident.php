@@ -32,4 +32,21 @@ class Incident extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function isFirstAssigned()
+    {
+        return $this->getOriginal('user_id') == null &&
+               $this->wasChanged('user_id');
+    }
+
+    public function isReassigned()
+    {
+        return $this->getOriginal('user_id') != null &&
+               $this->wasChanged('user_id');
+    }
+
+    public function isClosed()
+    {
+        return $this->status_id == Status::whereFirstName('Closed')->id;
+    }
 }

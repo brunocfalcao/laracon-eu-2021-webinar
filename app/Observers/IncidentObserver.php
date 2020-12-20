@@ -2,17 +2,21 @@
 
 namespace App\Observers;
 
+use App\Models\ActionType;
 use App\Models\Incident;
+use App\Models\IncidentLog;
+use App\Models\Status;
+use Illuminate\Support\Facades\Auth;
 
 class IncidentObserver
 {
     /**
-     * Handle the Incident "saving" event.
+     * Handle the Incident "saved" event.
      *
      * @param  \App\Models\Incident  $incident
      * @return void
      */
-    public function saving(Incident $incident)
+    public function saved(Incident $incident)
     {
         //
     }
@@ -25,7 +29,13 @@ class IncidentObserver
      */
     public function created(Incident $incident)
     {
-        //
+        IncidentLog::create([
+            'incident_id' => $incident->id,
+            'status_id' => Status::firstWhere('name', 'New')->id,
+            'action_type_id' => ActionType::firstWhere('name', 'New')->id,
+            'user_id' => Auth::check() ? Auth::id() : null,
+            'description' => 'Incident created by '.$incident->requester->name,
+        ]);
     }
 
     /**
@@ -36,7 +46,28 @@ class IncidentObserver
      */
     public function updated(Incident $incident)
     {
-        //
+        // Instance log instance with default attributes.
+        $logInstance = new IncidentLog();
+        $logInstance->incident_id = $incident_id;
+        $logInstance->status_id = $incident->status_id;
+        $logInstance->user_id = $incident->user_id;
+
+        /*
+         * 2 attributes are dynamic: action_type_id and description.
+         * Cases:
+         * - Assignment
+         * - Reassignment
+         * - Closed
+         * - Update (without re/assignment our closed)
+         */
+        if ($incident->isFirstAssigned()) {
+        }
+
+        if ($incident->isReassigned()) {
+        }
+
+        if ($incident->isClosed()) {
+        }
     }
 
     /**

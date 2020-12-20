@@ -4,12 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ActionType extends Model
+class Status extends Model
 {
     protected $guarded = [];
 
-    public function incidentLogs()
+    public function incidents()
     {
-        return $this->hasMany(IncidentLog::class);
+        return $this->hasMany(Incident::class);
     }
 }
