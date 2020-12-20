@@ -40,13 +40,7 @@ class CreateHelpdeskSchema extends Migration
 
             $table->foreignId('incident_id');
 
-            $table->unsignedBigInteger('status_id');
-
-            $table->foreign('status_id')->references('id')->on('action_types');
-
-            $table->foreignId('action_type_id')
-                  ->constrained()
-                  ->comment('Type of incident action (open, assigned, reassigned, closed)');
+            $table->foreignId('status_id');
 
             $table->foreignId('user_id')
                   ->nullable()
@@ -147,10 +141,8 @@ class CreateHelpdeskSchema extends Migration
                   ->comment('Current requested related assignment')
                   ->nullable();
 
-            $table->unsignedBigInteger('status_id')
-                  ->default(1);
-
-            $table->foreign('status_id')->references('id')->on('action_types');
+            $table->foreignId('status_id')
+                  ->constrained();
 
             $table->string('title')
                   ->comment('The incident title, short problem description');
