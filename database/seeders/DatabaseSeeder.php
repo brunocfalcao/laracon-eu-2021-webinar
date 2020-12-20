@@ -83,19 +83,20 @@ class DatabaseSeeder extends Seeder
         $incident->requester()->associate(Requester::find(1));
         $incident->title = $faker->sentence();
         $incident->description = $faker->paragraph();
-        $incident->save();
-
-        $incident->user_id = 2;
-        $incident->updated_at = now()->subHours(120);
+        $incident->updated_at = now()->subHours(rand(120, 240));
         $incident->created_at = $incident->updated_at;
         $incident->save();
 
+        $incident->user_id = 2;
+        $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
+        $incident->save();
+
         $incident->user_id = 4;
-        $incident->updated_at = $incident->updated_at->addHours(24);
+        $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
         $incident->save();
 
         $incident->title = 'My title was changed';
-        $incident->updated_at = $incident->updated_at->addHours(24);
+        $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
         $incident->save();
     }
 }

@@ -37,6 +37,9 @@ class IncidentObserver
             'status_id' => Status::firstWhere('name', 'New')->id,
             'user_id' => Auth::check() ? Auth::id() : null,
             'description' => 'Incident created by '.$incident->requester->name,
+            // In case we are simulating an incident lifecycle...
+            'created_at' => $incident->created_at,
+            'updated_at' => $incident->updated_at
         ]);
     }
 
@@ -56,6 +59,7 @@ class IncidentObserver
 
         // In case we are simulating an incident lifecycle...
         $logInstance->created_at = $incident->updated_at;
+        $logInstance->updated_at = $logInstance->created_at;
 
         /*
          * 2 attributes are dynamic: action_type_id and description.
