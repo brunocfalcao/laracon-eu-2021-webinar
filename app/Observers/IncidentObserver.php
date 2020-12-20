@@ -54,6 +54,9 @@ class IncidentObserver
         $logInstance->status_id = $incident->status_id;
         $logInstance->user_id = $incident->user_id;
 
+        // In case we are simulating an incident lifecycle...
+        $logInstance->created_at = $incident->updated_at;
+
         /*
          * 2 attributes are dynamic: action_type_id and description.
          * Cases:

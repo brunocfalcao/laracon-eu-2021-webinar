@@ -86,12 +86,16 @@ class DatabaseSeeder extends Seeder
         $incident->save();
 
         $incident->user_id = 2;
+        $incident->updated_at = now()->subHours(120);
+        $incident->created_at = $incident->updated_at;
         $incident->save();
 
         $incident->user_id = 4;
+        $incident->updated_at = $incident->updated_at->addHours(24);
         $incident->save();
 
         $incident->title = 'My title was changed';
+        $incident->updated_at = $incident->updated_at->addHours(24);
         $incident->save();
     }
 }
