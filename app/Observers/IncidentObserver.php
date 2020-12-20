@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\Models\Incident;
 use App\Models\IncidentLog;
 use App\Models\Status;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class IncidentObserver
@@ -62,15 +63,26 @@ class IncidentObserver
          * - Update (without re/assignment our closed)
          */
         if ($incident->isFirstAssigned()) {
+            $logInstance->description = 'Incident assigned to ' .
+                                        User::firstwhere('id', $incident->user_id)->name;
+            $logInstance->save();
         }
 
-        /*
         if ($incident->isReassigned()) {
+            $logInstance->description = 'Incident reassigned to ' .
+                                        User::firstwhere('id', $incident->user_id)->name;
+            $logInstance->save();
         }
 
         if ($incident->isClosed()) {
+            $logInstance->description = 'Incident closed';
+            $logInstance->save();
         }
-        */
+
+        if ($incident->onlyContentUpdated()) {
+            $logInstance->description = 'Incident content updated';
+            $logInstance->save();
+        }
     }
 
     /**

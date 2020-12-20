@@ -47,6 +47,14 @@ class Incident extends Model
 
     public function isClosed()
     {
-        return $this->status_id == Status::whereFirstName('Closed')->id;
+        return $this->status_id == Status::firstWhere('name', 'Closed')->id;
+    }
+
+    public function onlyContentUpdated()
+    {
+        return !$this->isFirstAssigned() &&
+               !$this->isReassigned() &&
+               !$this->isClosed() &&
+               $this->wasChanged();
     }
 }
