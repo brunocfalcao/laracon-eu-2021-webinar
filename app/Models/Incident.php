@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Status;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Incident extends Model
 {
+    use HasFactory;
+
     protected $guarded = [];
 
     public function user()
@@ -21,6 +25,11 @@ class Incident extends Model
     public function severity()
     {
         return $this->belongsTo(Severity::class);
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
     }
 
     public function priority()

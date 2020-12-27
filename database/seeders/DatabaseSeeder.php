@@ -77,6 +77,119 @@ class DatabaseSeeder extends Seeder
          * Each incident workflow should have a natural timming order separated
          * by a randomly 120 hours period (0 hours to 5 days max).
          */
+        Incident::factory()
+                ->count(rand(200, 400))
+                ->make()
+                ->each(function ($incident) {
+                    $incident->status()->associate(Status::find(1));
+                    $incident->requester()->associate(Requester::inRandomOrder()->first());
+                    $incident->severity()->associate(Severity::inRandomOrder()->first());
+                    $incident->priority()->associate(Priority::inRandomOrder()->first());
+                    $incident->category()->associate(Category::inRandomOrder()->first());
+                    $incident->updated_at = now()->subHours(rand(120, 240));
+                    $incident->created_at = $incident->updated_at;
+                    $incident->save();
+                });
+
+        foreach (Incident::all() as $incident) {
+            $type = rand(1, 7);
+
+            switch ($type) {
+                case 1:
+                    // The non-assigned incident. Do nothing.
+                    break;
+
+                case 2:
+                    // The assigned incident.
+                    $incident->user()->associate(User::inRandomOrder()->first());
+                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
+                    $incident->save();
+                    break;
+
+                case 3:
+                    // The assigned and ressigned incident.
+                    $incident->user()->associate(User::inRandomOrder()->first());
+                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
+                    $incident->save();
+
+                    $incident->fresh();
+                    $incident->user()->associate(User::inRandomOrder()->first());
+                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
+                    $incident->save();
+                    break;
+
+                case 4:
+                    // The assigned and closed ticket.
+                    $incident->user()->associate(User::inRandomOrder()->first());
+                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
+                    $incident->save();
+
+                    $incident->fresh();
+                    $incident->status()->associate(Status::firstWhere('name', 'Closed'));
+                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
+                    $incident->save();
+                    break;
+
+                case 5:
+                    // The assigned, ressigned and closed incident.
+                    $incident->user()->associate(User::inRandomOrder()->first());
+                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
+                    $incident->save();
+
+                    $incident->fresh();
+                    $incident->user()->associate(User::inRandomOrder()->first());
+                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
+                    $incident->save();
+
+                    $incident->fresh();
+                    $incident->status()->associate(Status::firstWhere('name', 'Closed'));
+                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
+                    $incident->save();
+                    break;
+
+                case 6:
+                    // The assigned, closed and reopened ticket.
+                    $incident->user()->associate(User::inRandomOrder()->first());
+                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
+                    $incident->save();
+
+                    $incident->fresh();
+                    $incident->status()->associate(Status::firstWhere('name', 'Closed'));
+                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
+                    $incident->save();
+
+                    $incident->fresh();
+                    $incident->status()->associate(Status::firstWhere('name', 'Reopened'));
+                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
+                    $incident->save();
+                    break;
+
+                case 7:
+                    // The assigned, reassigned, closed and reopened ticket.
+                    $incident->user()->associate(User::inRandomOrder()->first());
+                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
+                    $incident->save();
+
+                    $incident->fresh();
+                    $incident->user()->associate(User::inRandomOrder()->first());
+                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
+                    $incident->save();
+
+                    $incident->fresh();
+                    $incident->status()->associate(Status::firstWhere('name', 'Closed'));
+                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
+                    $incident->save();
+
+                    $incident->fresh();
+                    $incident->status()->associate(Status::firstWhere('name', 'Reopened'));
+                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
+                    $incident->save();
+                    break;
+            }
+        }
+
+        return;
+
         $faker = \Faker\Factory::create();
 
         $incident = new Incident();
@@ -98,5 +211,13 @@ class DatabaseSeeder extends Seeder
         $incident->title = 'My title was changed';
         $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
         $incident->save();
+    }
+
+    private function assignIncident()
+    {
+    }
+
+    private function reassignIncident()
+    {
     }
 }

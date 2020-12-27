@@ -11,45 +11,12 @@ use Illuminate\Support\Facades\Auth;
 class IncidentObserver
 {
     /**
-     * Handle the Incident "saving" event.
+     * Handle the Incident "saved" event.
      *
      * @param  \App\Models\Incident  $incident
      * @return void
      */
-    public function saving(Incident $incident)
-    {
-        if ($incident->status_id == null) {
-            $incident->status_id = Status::firstWhere('name', 'New')->id;
-        }
-    }
-
-    /**
-     * Handle the Incident "created" event.
-     *
-     * @param  \App\Models\Incident  $incident
-     * @return void
-     */
-    public function created(Incident $incident)
-    {
-        IncidentLog::create([
-            'incident_id' => $incident->id,
-            'status_id' => Status::firstWhere('name', 'New')->id,
-            'status_id' => Status::firstWhere('name', 'New')->id,
-            'user_id' => Auth::check() ? Auth::id() : null,
-            'description' => 'Incident created by '.$incident->requester->name,
-            // In case we are simulating an incident lifecycle...
-            'created_at' => $incident->created_at,
-            'updated_at' => $incident->updated_at
-        ]);
-    }
-
-    /**
-     * Handle the Incident "updated" event.
-     *
-     * @param  \App\Models\Incident  $incident
-     * @return void
-     */
-    public function updated(Incident $incident)
+    public function saved(Incident $incident)
     {
         // Instance log instance with default attributes.
         $logInstance = new IncidentLog();
@@ -61,14 +28,9 @@ class IncidentObserver
         $logInstance->created_at = $incident->updated_at;
         $logInstance->updated_at = $logInstance->created_at;
 
-        /*
-         * 2 attributes are dynamic: action_type_id and description.
-         * Cases:
-         * - Assignment
-         * - Reassignment
-         * - Closed
-         * - Update (without re/assignment our closed)
-         */
+        $logInstance->description = 'Incident created';
+        $logInstance->save();
+
         if ($incident->isFirstAssigned()) {
             $logInstance->description = 'Incident assigned to ' .
                                         User::firstwhere('id', $incident->user_id)->name;
