@@ -212,12 +212,4 @@ class DatabaseSeeder extends Seeder
         $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
         $incident->save();
     }
-
-    private function assignIncident()
-    {
-    }
-
-    private function reassignIncident()
-    {
-    }
 }
