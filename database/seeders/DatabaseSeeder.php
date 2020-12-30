@@ -31,8 +31,8 @@ class DatabaseSeeder extends Seeder
         Priority::create(['name' => 'Urgent']);
         Priority::create(['name' => 'Critical']);
 
-        Profile::create(['name' => 'Admin']);
-        Profile::create(['name' => 'Non-Admin']);
+        Profile::create(['name' => 'Admin', 'is_admin' => true]);
+        Profile::create(['name' => 'Non-Admin', 'is_admin' => false]);
 
         Severity::create(['name' => 'Low']);
         Severity::create(['name' => 'Urgent']);
@@ -61,7 +61,16 @@ class DatabaseSeeder extends Seeder
         User::whereNull('profile_id')
             ->update(['profile_id' => Profile::firstWhere('name', 'Non-Admin')->id]);
 
-        Requester::factory()->count(50)->create();
+        // Add a specific user.
+        User::create([
+            'name' => 'Bruno Falcao',
+            'password' => bcrypt('honda'),
+            'email' => 'bruno.falcao@live.com',
+            'profile_id' => Profile::firstWhere('name', 'Admin')->id
+        ]);
+
+        // Create a random number of requesters.
+        Requester::factory()->count(rand(50, 100))->create();
 
         /**
          * Create incident workflows. Each incident can have different workflow types.
