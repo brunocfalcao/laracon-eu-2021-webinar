@@ -2,28 +2,29 @@
 
 namespace App\Nova;
 
+use App\Nova\Status;
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\Boolean;
-use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class Profile extends Resource
+class Incident extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Profile::class;
+    public static $model = \App\Models\Incident::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'name';
+    public static $title = 'id';
 
     /**
      * The columns that should be searched.
@@ -31,7 +32,7 @@ class Profile extends Resource
      * @var array
      */
     public static $search = [
-        'name',
+        'id',
     ];
 
     /**
@@ -45,12 +46,16 @@ class Profile extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            Text::make('Name', 'name')
+            BelongsTo::make('Requester', 'requester', Requester::class),
+
+            BelongsTo::make('User', 'user', User::class),
+
+            BelongsTo::make('Status', 'status', Status::class),
+
+            Text::make('Title', 'title')
                 ->rules('required'),
 
-            Boolean::make('Is Admin?', 'is_admin'),
-
-            HasMany::make('Users', 'users', User::class)
+            Textarea::make('Description', 'description'),
         ];
     }
 

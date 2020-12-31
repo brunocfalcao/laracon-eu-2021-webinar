@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\IncidentLog;
 use App\Models\Status;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -25,6 +26,11 @@ class Incident extends Model
     public function severity()
     {
         return $this->belongsTo(Severity::class);
+    }
+
+    public function logs()
+    {
+        return $this->hasMany(IncidentLog::class);
     }
 
     public function status()

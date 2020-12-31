@@ -3,20 +3,20 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\Boolean;
-use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\Country;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Place;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class Profile extends Resource
+class Requester extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Profile::class;
+    public static $model = \App\Models\Requester::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -31,7 +31,7 @@ class Profile extends Resource
      * @var array
      */
     public static $search = [
-        'name',
+        'name', 'email'
     ];
 
     /**
@@ -45,12 +45,15 @@ class Profile extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            Text::make('Name', 'name')
+            Text::make('Name')
                 ->rules('required'),
 
-            Boolean::make('Is Admin?', 'is_admin'),
+            Text::make('Email')
+                ->rules('required', 'email', 'max:254')
+                ->creationRules('unique:users,email')
+                ->updateRules('unique:users,email,{{resourceId}}'),
 
-            HasMany::make('Users', 'users', User::class)
+            $this->addressFields(),
         ];
     }
 
@@ -96,5 +99,19 @@ class Profile extends Resource
     public function actions(Request $request)
     {
         return [];
+    }
+
+    protected function addressFields()
+    {
+        return $this->merge([
+            Place::make('Address', 'address_line_1')->hideFromIndex(),
+            Text::make('Address Line 2')->hideFromIndex(),
+            Text::make('City')->hideFromIndex(),
+            Text::make('State')->hideFromIndex(),
+            Text::make('Postal Code')->hideFromIndex(),
+            Country::make('Country')->hideFromIndex(),
+            Text::make('Latitude')->hideFromIndex(),
+            Text::make('Longitude')->hideFromIndex(),
+        ]);
     }
 }

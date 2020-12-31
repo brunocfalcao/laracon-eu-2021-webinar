@@ -4,19 +4,18 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Boolean;
-use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class Profile extends Resource
+class Category extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Profile::class;
+    public static $model = \App\Models\Category::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -47,10 +46,6 @@ class Profile extends Resource
 
             Text::make('Name', 'name')
                 ->rules('required'),
-
-            Boolean::make('Is Admin?', 'is_admin'),
-
-            HasMany::make('Users', 'users', User::class)
         ];
     }
 

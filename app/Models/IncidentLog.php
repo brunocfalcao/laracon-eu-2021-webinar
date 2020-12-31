@@ -10,6 +10,11 @@ class IncidentLog extends Model
 
     protected $table = 'incident_logs';
 
+    public function incident()
+    {
+        return $this->belongsTo(Incident::class);
+    }
+
     public function status()
     {
         return $this->belongsTo(Status::class);
