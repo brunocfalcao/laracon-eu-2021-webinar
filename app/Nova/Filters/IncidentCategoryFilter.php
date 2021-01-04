@@ -17,6 +17,13 @@ class IncidentCategoryFilter extends Filter
     public $component = 'select-filter';
 
     /**
+     * The displayable name of the filter.
+     *
+     * @var string
+     */
+    public $name = 'Filter by Category';
+
+    /**
      * Apply the filter to the given query.
      *
      * @param  \Illuminate\Http\Request  $request

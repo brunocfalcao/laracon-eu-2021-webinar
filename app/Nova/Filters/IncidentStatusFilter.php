@@ -16,6 +16,13 @@ class IncidentStatusFilter extends Filter
     public $component = 'select-filter';
 
     /**
+     * The displayable name of the filter.
+     *
+     * @var string
+     */
+    public $name = 'Filter by Status';
+
+    /**
      * Apply the filter to the given query.
      *
      * @param  \Illuminate\Http\Request  $request
