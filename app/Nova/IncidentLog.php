@@ -3,7 +3,9 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class IncidentLog extends Resource
@@ -20,7 +22,14 @@ class IncidentLog extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'description';
+
+    /**
+     * Indicates if the resource should be displayed in the sidebar.
+     *
+     * @var bool
+     */
+    public static $displayInNavigation = false;
 
     /**
      * The columns that should be searched.
@@ -28,7 +37,7 @@ class IncidentLog extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'description',
     ];
 
     /**
@@ -41,6 +50,13 @@ class IncidentLog extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
+
+            Text::make('Description', 'description')
+                ->readonly(),
+
+            BelongsTo::make('User', 'user', User::class),
+            BelongsTo::make('Status', 'status', Status::class),
+            BelongsTo::make('Incident', 'incident', Incident::class),
         ];
     }
 

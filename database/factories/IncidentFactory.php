@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Incident;
-use App\Models\Requester;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class IncidentFactory extends Factory
@@ -25,7 +24,7 @@ class IncidentFactory extends Factory
         return [
             'description' => $this->faker->name,
             'title' => $this->faker->words(10, true),
-            'description' => $this->faker->paragraphs(1, true)
+            'description' => $this->faker->paragraphs(1, true),
         ];
     }
 }

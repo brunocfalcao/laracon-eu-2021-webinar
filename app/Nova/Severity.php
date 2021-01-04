@@ -3,10 +3,9 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Severity extends Resource
 {
@@ -46,6 +45,8 @@ class Severity extends Resource
 
             Text::make('Name', 'name')
                 ->rules('required'),
+
+            HasMany::make('Incidents', 'incidents', Incident::class),
         ];
     }
 

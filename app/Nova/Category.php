@@ -2,14 +2,16 @@
 
 namespace App\Nova;
 
+use App\Nova\AbstractResource;
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Http\Requests\NovaRequest;
 
-class Category extends Resource
+class Category extends AbstractResource
 {
+    public static $indexDefaultOrder = ['id' => 'asc'];
+
     /**
      * The model the resource corresponds to.
      *
@@ -46,6 +48,8 @@ class Category extends Resource
 
             Text::make('Name', 'name')
                 ->rules('required'),
+
+            HasMany::make('Incidents', 'incidents', Incident::class),
         ];
     }
 

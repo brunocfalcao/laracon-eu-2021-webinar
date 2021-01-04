@@ -7,7 +7,6 @@ use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Profile extends Resource
 {
@@ -50,7 +49,7 @@ class Profile extends Resource
 
             Boolean::make('Is Admin?', 'is_admin'),
 
-            HasMany::make('Users', 'users', User::class)
+            HasMany::make('Users', 'users', User::class),
         ];
     }
 

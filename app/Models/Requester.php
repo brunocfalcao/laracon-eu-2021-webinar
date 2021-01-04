@@ -12,4 +12,9 @@ class Requester extends Model
     protected $guarded = [];
 
     protected $table = 'requesters';
+
+    public function incidents()
+    {
+        return $this->hasMany(Incident::class);
+    }
 }

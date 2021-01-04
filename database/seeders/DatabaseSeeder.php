@@ -65,14 +65,14 @@ class DatabaseSeeder extends Seeder
         User::create([
             'name' => 'Bruno Falcao',
             'password' => bcrypt('honda'),
-            'email' => 'bruno.falcao@live.com',
-            'profile_id' => Profile::firstWhere('name', 'Admin')->id
+            'email' => 'bruno@masteringnova.com',
+            'profile_id' => Profile::firstWhere('name', 'Admin')->id,
         ]);
 
         // Create a random number of requesters.
         Requester::factory()->count(rand(50, 100))->create();
 
-        /**
+        /*
          * Create incident workflows. Each incident can have different workflow types.
          *
          * 1. The non-assigned incident.
@@ -87,7 +87,7 @@ class DatabaseSeeder extends Seeder
          * by a randomly 120 hours period (0 hours to 5 days max).
          */
         Incident::factory()
-                ->count(rand(200, 400))
+                ->count(rand(2000, 5000))
                 ->make()
                 ->each(function ($incident) {
                     $incident->status()->associate(Status::find(1));
@@ -111,87 +111,96 @@ class DatabaseSeeder extends Seeder
                 case 2:
                     // The assigned incident.
                     $incident->user()->associate(User::inRandomOrder()->first());
-                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
+                    $incident->status()->associate(Status::firstWhere('name', 'Assigned'));
+                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24 * 3600));
                     $incident->save();
                     break;
 
                 case 3:
                     // The assigned and ressigned incident.
                     $incident->user()->associate(User::inRandomOrder()->first());
-                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
+                    $incident->status()->associate(Status::firstWhere('name', 'Assigned'));
+                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24 * 3600));
                     $incident->save();
 
                     $incident->fresh();
                     $incident->user()->associate(User::inRandomOrder()->first());
-                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
+                    $incident->status()->associate(Status::firstWhere('name', 'Assigned'));
+                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24 * 3600));
                     $incident->save();
                     break;
 
                 case 4:
                     // The assigned and closed ticket.
                     $incident->user()->associate(User::inRandomOrder()->first());
-                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
+                    $incident->status()->associate(Status::firstWhere('name', 'Assigned'));
+                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24 * 3600));
                     $incident->save();
 
                     $incident->fresh();
                     $incident->status()->associate(Status::firstWhere('name', 'Closed'));
-                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
+                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24 * 3600));
                     $incident->save();
                     break;
 
                 case 5:
                     // The assigned, ressigned and closed incident.
                     $incident->user()->associate(User::inRandomOrder()->first());
-                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
+                    $incident->status()->associate(Status::firstWhere('name', 'Assigned'));
+                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24 * 3600));
                     $incident->save();
 
                     $incident->fresh();
                     $incident->user()->associate(User::inRandomOrder()->first());
-                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
+                    $incident->status()->associate(Status::firstWhere('name', 'Assigned'));
+                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24 * 3600));
                     $incident->save();
 
                     $incident->fresh();
                     $incident->status()->associate(Status::firstWhere('name', 'Closed'));
-                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
+                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24 * 3600));
                     $incident->save();
                     break;
 
                 case 6:
                     // The assigned, closed and reopened ticket.
                     $incident->user()->associate(User::inRandomOrder()->first());
-                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
+                    $incident->status()->associate(Status::firstWhere('name', 'Assigned'));
+                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24 * 3600));
                     $incident->save();
 
                     $incident->fresh();
                     $incident->status()->associate(Status::firstWhere('name', 'Closed'));
-                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
+                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24 * 3600));
                     $incident->save();
 
                     $incident->fresh();
                     $incident->status()->associate(Status::firstWhere('name', 'Reopened'));
-                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
+                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24 * 3600));
                     $incident->save();
                     break;
 
                 case 7:
                     // The assigned, reassigned, closed and reopened ticket.
                     $incident->user()->associate(User::inRandomOrder()->first());
-                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
+                    $incident->status()->associate(Status::firstWhere('name', 'Assigned'));
+                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24 * 3600));
                     $incident->save();
 
                     $incident->fresh();
                     $incident->user()->associate(User::inRandomOrder()->first());
-                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
+                    $incident->status()->associate(Status::firstWhere('name', 'Assigned'));
+                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24 * 3600));
                     $incident->save();
 
                     $incident->fresh();
                     $incident->status()->associate(Status::firstWhere('name', 'Closed'));
-                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
+                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24 * 3600));
                     $incident->save();
 
                     $incident->fresh();
                     $incident->status()->associate(Status::firstWhere('name', 'Reopened'));
-                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
+                    $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24 * 3600));
                     $incident->save();
                     break;
             }
@@ -210,15 +219,15 @@ class DatabaseSeeder extends Seeder
         $incident->save();
 
         $incident->user_id = 2;
-        $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
+        $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24 * 3600));
         $incident->save();
 
         $incident->user_id = 4;
-        $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
+        $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24 * 3600));
         $incident->save();
 
         $incident->title = 'My title was changed';
-        $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24*3600));
+        $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24 * 3600));
         $incident->save();
     }
 }

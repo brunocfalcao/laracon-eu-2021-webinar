@@ -4,10 +4,10 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Country;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Place;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Requester extends Resource
 {
@@ -31,7 +31,7 @@ class Requester extends Resource
      * @var array
      */
     public static $search = [
-        'name', 'email'
+        'name', 'email',
     ];
 
     /**
@@ -54,6 +54,8 @@ class Requester extends Resource
                 ->updateRules('unique:users,email,{{resourceId}}'),
 
             $this->addressFields(),
+
+            HasMany::make('Incidents', 'incidents', Incident::class),
         ];
     }
 

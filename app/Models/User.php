@@ -21,4 +21,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Profile::class);
     }
+
+    public function incidents()
+    {
+        return $this->hasMany(Incident::class);
+    }
 }

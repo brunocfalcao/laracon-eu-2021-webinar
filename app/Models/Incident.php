@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\IncidentLog;
-use App\Models\Status;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -67,9 +65,9 @@ class Incident extends Model
 
     public function onlyContentUpdated()
     {
-        return !$this->isFirstAssigned() &&
-               !$this->isReassigned() &&
-               !$this->isClosed() &&
+        return ! $this->isFirstAssigned() &&
+               ! $this->isReassigned() &&
+               ! $this->isClosed() &&
                $this->wasChanged();
     }
 }
