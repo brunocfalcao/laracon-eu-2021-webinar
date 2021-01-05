@@ -19,7 +19,7 @@ class IncidentLogPolicy
      */
     public function viewAny(User $user)
     {
-        /**
+        /*
          * This codebase will guarantee that the incident logs only appear
          * on related resource relationship data, and never as the main
          * resource Incident Log being managed.

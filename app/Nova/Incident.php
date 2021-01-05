@@ -60,6 +60,7 @@ class Incident extends Resource
     public static function relatableQuert(NovaRequest $request, $query)
     {
         throw new \Exception('Inside relatable query');
+
         return $query->where('user_id', $request->user()->id);
     }
 
@@ -121,7 +122,7 @@ class Incident extends Resource
     {
         return [
             new IncidentStatusFilter(),
-            new IncidentCategoryFilter()
+            new IncidentCategoryFilter(),
         ];
     }
 

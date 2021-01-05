@@ -3,7 +3,6 @@
 namespace App\Nova\Filters;
 
 use App\Models\Category;
-use App\Models\Status;
 use Illuminate\Http\Request;
 use Laravel\Nova\Filters\Filter;
 
@@ -44,7 +43,7 @@ class IncidentCategoryFilter extends Filter
      */
     public function options(Request $request)
     {
-        /**
+        /*
          * The array key is the dropdown label.
          * The array value is the dropdown value.
          *

@@ -33,6 +33,7 @@ class IncidentObserver
             $logInstance->description = 'Incident assigned to '.
                                         User::firstwhere('id', $incident->user_id)->name;
             $logInstance->save();
+
             return;
         }
 
@@ -40,12 +41,14 @@ class IncidentObserver
             $logInstance->description = 'Incident reassigned to '.
                                         User::firstwhere('id', $incident->user_id)->name;
             $logInstance->save();
+
             return;
         }
 
         if ($incident->isClosed()) {
             $logInstance->description = 'Incident closed';
             $logInstance->save();
+
             return;
         }
 

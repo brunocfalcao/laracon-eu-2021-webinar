@@ -43,7 +43,7 @@ class IncidentStatusFilter extends Filter
      */
     public function options(Request $request)
     {
-        /**
+        /*
          * The array key is the dropdown label.
          * The array value is the dropdown value.
          *

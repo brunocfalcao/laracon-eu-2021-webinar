@@ -2,7 +2,6 @@
 
 namespace App\Nova;
 
-use App\Nova\AbstractResource;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
