@@ -11,8 +11,8 @@
     "license": "MIT",
     "repositories": [
         {
-            "type": "composer",
-            "url": "https://nova.laravel.com"
+            "type": "path",
+            "url": "./nova"
         }
     ],
     "require": {
@@ -21,7 +21,7 @@
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
-        "laravel/nova": "^3.16",
+        "laravel/nova": "*",
         "laravel/tinker": "^2.5",
         "matt-allan/laravel-code-style": "^0.6.0",
         "wildbit/swiftmailer-postmark": "^3.3"

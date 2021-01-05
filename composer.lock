@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "79bee34e4f4a8fc5d38c43c32c4ac4ea",
+    "content-hash": "f291028d77d692e04b987a6eb29f7225",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1638,16 +1638,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v8.20.1",
+            "version": "v8.21.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "b5d8573ab16027867eaa1ac148893833434f9b02"
+                "reference": "a61cab167c35f465a923737ee6e6fb99cd5fde88"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/b5d8573ab16027867eaa1ac148893833434f9b02",
-                "reference": "b5d8573ab16027867eaa1ac148893833434f9b02",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/a61cab167c35f465a923737ee6e6fb99cd5fde88",
+                "reference": "a61cab167c35f465a923737ee6e6fb99cd5fde88",
                 "shasum": ""
             },
             "require": {
@@ -1801,21 +1801,15 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2020-12-22T21:21:19+00:00"
+            "time": "2021-01-05T15:43:10+00:00"
         },
         {
             "name": "laravel/nova",
-            "version": "3.18.0",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:laravel/nova.git",
-                "reference": "2c0551e643960d73617163108b6fa8afda196ea7"
-            },
+            "version": "3.19.0",
             "dist": {
-                "type": "zip",
-                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-2c0551e643960d73617163108b6fa8afda196ea7-zip-b09038.zip",
-                "reference": "2c0551e643960d73617163108b6fa8afda196ea7",
-                "shasum": "bfbbcf19316ad00a2caa970497d7225dc7f00fda"
+                "type": "path",
+                "url": "./nova",
+                "reference": "0b0fc491826429f9aca78cd55f7866043fa14fb7"
             },
             "require": {
                 "brick/money": "^0.5.0",
@@ -1824,8 +1818,8 @@
                 "illuminate/support": "^7.0|^8.0",
                 "laravel/ui": "^2.0|^3.0",
                 "moontoast/math": "^1.1",
-                "php": "^7.2.5",
-                "spatie/once": "^1.1 | ^2.0",
+                "php": "^7.2.5|^8.0",
+                "spatie/once": "^1.1|^2.0|^3.0",
                 "symfony/console": "^5.0",
                 "symfony/finder": "^5.0",
                 "symfony/intl": "^5.0",
@@ -1892,7 +1886,9 @@
                 "admin",
                 "laravel"
             ],
-            "time": "2020-12-22T19:08:52+00:00"
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "laravel/tinker",
