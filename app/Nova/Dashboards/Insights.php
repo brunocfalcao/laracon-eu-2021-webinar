@@ -3,7 +3,7 @@
 namespace App\Nova\Dashboards;
 
 use Laravel\Nova\Dashboard;
-use Brunocfalcao\IncidentsInsights\IncidentsInsights;
+use Brunocfalcao\IncidentsTotal\IncidentsTotal;
 
 class Insights extends Dashboard
 {
@@ -15,7 +15,9 @@ class Insights extends Dashboard
     public function cards()
     {
         return [
-            //
+            (new IncidentsTotal())
+            ->withMeta(['total' => 69])
+            ,
         ];
     }
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f291028d77d692e04b987a6eb29f7225",
+    "content-hash": "dcd9e3898a5e3d9012fb6b11bd4607bc",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -173,6 +173,42 @@
                 }
             ],
             "time": "2020-08-19T22:52:38+00:00"
+        },
+        {
+            "name": "brunocfalcao/incidents-total",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./nova-components/IncidentsTotal",
+                "reference": "aeb8188415b694e70e027534378fb26562166189"
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Brunocfalcao\\IncidentsTotal\\CardServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Brunocfalcao\\IncidentsTotal\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "A Laravel Nova card.",
+            "keywords": [
+                "laravel",
+                "nova"
+            ],
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "cakephp/chronos",

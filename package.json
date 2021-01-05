@@ -9,7 +9,9 @@
         "prod": "npm run production",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --config=node_modules/laravel-mix/setup/webpack.config.js",
         "build-incidents-insights": "cd nova-components/IncidentsInsights && npm run dev",
-        "build-incidents-insights-prod": "cd nova-components/IncidentsInsights && npm run prod"
+        "build-incidents-insights-prod": "cd nova-components/IncidentsInsights && npm run prod",
+        "build-incidents-total": "cd nova-components/IncidentsTotal && npm run dev",
+        "build-incidents-total-prod": "cd nova-components/IncidentsTotal && npm run prod"
     },
     "devDependencies": {
         "axios": "^0.19",

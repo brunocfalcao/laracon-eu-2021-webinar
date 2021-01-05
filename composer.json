@@ -13,6 +13,10 @@
         {
             "type": "path",
             "url": "./nova"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/IncidentsTotal"
         }
     ],
     "require": {
@@ -24,7 +28,8 @@
         "laravel/nova": "*",
         "laravel/tinker": "^2.5",
         "matt-allan/laravel-code-style": "^0.6.0",
-        "wildbit/swiftmailer-postmark": "^3.3"
+        "wildbit/swiftmailer-postmark": "^3.3",
+        "brunocfalcao/incidents-total": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
