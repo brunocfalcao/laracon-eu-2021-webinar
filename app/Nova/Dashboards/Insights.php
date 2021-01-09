@@ -14,11 +14,7 @@ class Insights extends Dashboard
      */
     public function cards()
     {
-        return [
-            (new IncidentsTotal())
-            ->withMeta(['total' => 69])
-            ,
-        ];
+        //
     }
 
     /**

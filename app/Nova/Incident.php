@@ -2,15 +2,16 @@
 
 namespace App\Nova;
 
-use App\Nova\Filters\IncidentCategoryFilter;
-use App\Nova\Filters\IncidentStatusFilter;
-use Illuminate\Http\Request;
-use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
+use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Fields\BelongsTo;
+use App\Nova\Filters\IncidentStatusFilter;
+use App\Nova\Lenses\MostImportantIncidents;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use App\Nova\Filters\IncidentCategoryFilter;
 
 class Incident extends Resource
 {
@@ -134,7 +135,9 @@ class Incident extends Resource
      */
     public function lenses(Request $request)
     {
-        return [];
+        return [
+            new MostImportantIncidents()
+        ];
     }
 
     /**
