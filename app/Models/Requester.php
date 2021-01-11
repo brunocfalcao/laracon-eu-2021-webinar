@@ -13,6 +13,16 @@ class Requester extends Model
 
     protected $table = 'requesters';
 
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'extra_information' => 'array',
+        'registration_date' => 'date'
+    ];
+
     public function incidents()
     {
         return $this->hasMany(Incident::class);

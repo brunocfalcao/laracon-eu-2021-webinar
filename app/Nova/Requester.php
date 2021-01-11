@@ -2,12 +2,14 @@
 
 namespace App\Nova;
 
+use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\Date;
+use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Place;
 use Laravel\Nova\Fields\Country;
 use Laravel\Nova\Fields\HasMany;
-use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Place;
-use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\KeyValue;
 
 class Requester extends Resource
 {
@@ -52,6 +54,14 @@ class Requester extends Resource
                 ->rules('required', 'email', 'max:254')
                 ->creationRules('unique:users,email')
                 ->updateRules('unique:users,email,{{resourceId}}'),
+
+            Date::make('Registration Date', 'registration_date')
+                ->rules('required'),
+
+            File::make('Contract Signed', 'contract_signed')->disk('public'),
+
+            KeyValue::make('Extra Information', 'extra_information')
+                    ->rules('json'),
 
             $this->addressFields(),
 

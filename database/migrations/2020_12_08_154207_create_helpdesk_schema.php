@@ -100,6 +100,15 @@ class CreateHelpdeskSchema extends Migration
 
             $table->string('email');
 
+            $table->date('registration_date')
+                  ->nullable();
+
+            $table->string('contract_signed')
+                  ->nullable();
+
+            $table->json('extra_information')
+                  ->nullable();
+
             $table->string('address_line_1')
                   ->nullable();
 

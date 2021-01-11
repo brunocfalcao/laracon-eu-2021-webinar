@@ -24,6 +24,7 @@ class RequesterFactory extends Factory
         return [
             'name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
+            'registration_date' => now()->subMinutes(rand(5 * 1440, 15 * 1440))
         ];
     }
 }
