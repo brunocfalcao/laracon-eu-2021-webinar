@@ -7,7 +7,7 @@ use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 
-class Severity extends Resource
+class Severity extends AbstractResource
 {
     /**
      * The model the resource corresponds to.

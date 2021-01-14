@@ -9,6 +9,7 @@ use App\Models\Profile;
 use App\Models\Requester;
 use App\Models\Severity;
 use App\Models\Status;
+use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -21,6 +22,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $faker = \Faker\Factory::create();
+
         Category::create(['name' => 'Emails']);
         Category::create(['name' => 'Registration']);
         Category::create(['name' => 'Sign In']);
@@ -43,6 +46,10 @@ class DatabaseSeeder extends Seeder
         Status::create(['name' => 'Assigned']);
         Status::create(['name' => 'Closed']);
         Status::create(['name' => 'Reopened']);
+
+        Tag::create(['name' => 'Improvement needed']);
+        Tag::create(['name' => 'Not case related']);
+        Tag::create(['name' => 'Non-resolution possible']);
 
         User::factory(rand(10, 20))->create();
 
@@ -70,7 +77,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Create a random number of requesters.
-        Requester::factory()->count(rand(50, 100))->create();
+        Requester::factory()->count(rand(10, 20))->create();
 
         /*
          * Create incident workflows. Each incident can have different workflow types.
@@ -87,14 +94,23 @@ class DatabaseSeeder extends Seeder
          * by a randomly 120 hours period (0 hours to 5 days max).
          */
         Incident::factory()
-                ->count(rand(2000, 5000))
+                ->count(rand(100, 500))
                 ->make()
                 ->each(function ($incident) {
                     $incident->status()->associate(Status::find(1));
-                    $incident->requester()->associate(Requester::inRandomOrder()->first());
-                    $incident->severity()->associate(Severity::inRandomOrder()->first());
-                    $incident->priority()->associate(Priority::inRandomOrder()->first());
-                    $incident->category()->associate(Category::inRandomOrder()->first());
+
+                    $incident->requester()
+                             ->associate(Requester::inRandomOrder()->first());
+
+                    $incident->severity()
+                             ->associate(Severity::inRandomOrder()->first());
+
+                    $incident->priority()
+                             ->associate(Priority::inRandomOrder()->first());
+
+                    $incident->category()
+                             ->associate(Category::inRandomOrder()->first());
+
                     $incident->updated_at = now()->subHours(rand(120, 240));
                     $incident->created_at = $incident->updated_at;
                     $incident->save();
@@ -102,6 +118,15 @@ class DatabaseSeeder extends Seeder
 
         foreach (Incident::all() as $incident) {
             $type = rand(1, 7);
+
+            $totalTags = Tag::all()->count();
+            // Also attach tags to the incident.
+            $times = rand(1, $totalTags);
+
+            for ($i = 0; $i < $times; $i++) {
+                $randomTag = Tag::inRandomOrder()->first();
+                $incident->tags()->attach($randomTag->id, ['comments' => $faker->sentence()]);
+            }
 
             switch ($type) {
                 case 1:
@@ -207,8 +232,6 @@ class DatabaseSeeder extends Seeder
         }
 
         return;
-
-        $faker = \Faker\Factory::create();
 
         $incident = new Incident();
         $incident->requester()->associate(Requester::find(1));

@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Nova\Dashboards\Insights;
+use App\Nova\Dashboards\TicketInsights;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\Cards\Help;
 use Laravel\Nova\Nova;
@@ -68,7 +68,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         return [
 
-            new Insights(),
+            new TicketInsights(),
 
         ];
     }

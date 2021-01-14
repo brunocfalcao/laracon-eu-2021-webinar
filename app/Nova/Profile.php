@@ -8,7 +8,7 @@ use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 
-class Profile extends Resource
+class Profile extends AbstractResource
 {
     /**
      * The model the resource corresponds to.

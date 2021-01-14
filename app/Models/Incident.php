@@ -11,6 +11,13 @@ class Incident extends Model
 
     protected $guarded = [];
 
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class)
+                    ->withPivot('comments')
+                    ->withTimestamps();
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

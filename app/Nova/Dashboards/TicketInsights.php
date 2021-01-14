@@ -3,10 +3,19 @@
 namespace App\Nova\Dashboards;
 
 use Laravel\Nova\Dashboard;
-use Brunocfalcao\IncidentsTotal\IncidentsTotal;
 
-class Insights extends Dashboard
+class TicketInsights extends Dashboard
 {
+    /**
+     * Get the displayable name of the dashboard.
+     *
+     * @return string
+     */
+    public static function label()
+    {
+        return 'Ticket Insights';
+    }
+
     /**
      * Get the cards for the dashboard.
      *
@@ -24,6 +33,6 @@ class Insights extends Dashboard
      */
     public static function uriKey()
     {
-        return 'insights';
+        return 'ticket-insights';
     }
 }

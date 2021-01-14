@@ -2,18 +2,18 @@
 
 namespace App\Nova;
 
-use Laravel\Nova\Fields\ID;
-use Illuminate\Http\Request;
-use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\HasMany;
-use Laravel\Nova\Fields\Textarea;
-use Laravel\Nova\Fields\BelongsTo;
+use App\Nova\Filters\IncidentCategoryFilter;
 use App\Nova\Filters\IncidentStatusFilter;
 use App\Nova\Lenses\MostImportantIncidents;
-use Laravel\Nova\Http\Requests\NovaRequest;
-use App\Nova\Filters\IncidentCategoryFilter;
+use Illuminate\Http\Request;
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\BelongsToMany;
+use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 
-class Incident extends Resource
+class Incident extends AbstractResource
 {
     /**
      * The model the resource corresponds to.
@@ -37,33 +37,6 @@ class Incident extends Resource
     public static $search = [
         'title', 'description',
     ];
-
-    /**
-     * Build an "index" query for the given resource.
-     *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public static function indexQuery(NovaRequest $request, $query)
-    {
-        //throw new \Exception('Inside index query');
-        //return $query->where('user_id', $request->user()->id);
-    }
-
-    /**
-     * Build an "index" query for the given resource.
-     *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public static function relatableQuert(NovaRequest $request, $query)
-    {
-        throw new \Exception('Inside relatable query');
-
-        return $query->where('user_id', $request->user()->id);
-    }
 
     /**
      * Get the fields displayed by the resource.
@@ -98,6 +71,8 @@ class Incident extends Resource
             BelongsTo::make('Category', 'category', Category::class),
 
             HasMany::make('Log', 'logs', IncidentLog::class),
+
+            BelongsToMany::make('Tags', 'tags', Tag::class),
 
         ];
     }
@@ -136,7 +111,7 @@ class Incident extends Resource
     public function lenses(Request $request)
     {
         return [
-            new MostImportantIncidents()
+            new MostImportantIncidents(),
         ];
     }
 

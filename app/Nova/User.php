@@ -10,7 +10,7 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Text;
 
-class User extends Resource
+class User extends AbstractResource
 {
     /**
      * The model the resource corresponds to.

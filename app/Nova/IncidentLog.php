@@ -4,11 +4,26 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 
-class IncidentLog extends Resource
+class IncidentLog extends AbstractResource
 {
+    /**
+     * Indicates the order of the default index query columns.
+     *
+     * @var array
+     */
+    public static $indexDefaultOrder = ['created_at' => 'asc'];
+
+    /**
+     * Indicates if the resource should be globally searchable.
+     *
+     * @var bool
+     */
+    public static $globallySearchable = false;
+
     /**
      * The model the resource corresponds to.
      *
@@ -17,7 +32,8 @@ class IncidentLog extends Resource
     public static $model = \App\Models\IncidentLog::class;
 
     /**
-     * The single value that should be used to represent the resource when being displayed.
+     * The single value that should be used to represent the resource when
+     * being displayed.
      *
      * @var string
      */
@@ -56,6 +72,10 @@ class IncidentLog extends Resource
             BelongsTo::make('User', 'user', User::class),
             BelongsTo::make('Status', 'status', Status::class),
             BelongsTo::make('Incident', 'incident', Incident::class),
+
+            DateTime::make('Created at', 'created_at')
+                ->readonly()
+                ->format('DD-MM-YYYY HH:mm:ss'),
         ];
     }
 

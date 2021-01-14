@@ -93,6 +93,15 @@ class CreateHelpdeskSchema extends Migration
             $table->timestamps();
         });
 
+        Schema::create('tags', function (Blueprint $table) {
+            $table->id();
+
+            $table->string('name');
+
+            $table->engine = 'InnoDB';
+            $table->timestamps();
+        });
+
         Schema::create('requesters', function (Blueprint $table) {
             $table->id();
 
@@ -180,11 +189,13 @@ class CreateHelpdeskSchema extends Migration
             $table->softDeletes();
         });
 
-        Schema::create('incident_requester', function (Blueprint $table) {
+        Schema::create('incident_tag', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('requester_id');
-            $table->foreignId('incident_id');
+            $table->foreignId('tag_id')->constrained();
+            $table->foreignId('incident_id')->constrained();
+            $table->string('comments')
+                  ->nullable();
 
             $table->engine = 'InnoDB';
             $table->timestamps();

@@ -20,7 +20,7 @@ class Requester extends Model
      */
     protected $casts = [
         'extra_information' => 'array',
-        'registration_date' => 'date'
+        'registration_date' => 'date',
     ];
 
     public function incidents()

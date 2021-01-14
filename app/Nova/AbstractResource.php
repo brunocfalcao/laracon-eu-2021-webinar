@@ -7,6 +7,13 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 abstract class AbstractResource extends Resource
 {
     /**
+     * The number of results to display in the global search.
+     *
+     * @var int
+     */
+    public static $globalSearchResults = 10;
+
+    /**
      * Abstract index query that will sort any column from your Resource.
      * If the column is not specified, then it uses the default behavior.
      * Uses a static property $indexDefaultOrder, with multiple keys.
