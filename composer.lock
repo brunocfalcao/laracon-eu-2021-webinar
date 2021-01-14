@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9cb6722d1e4b6def7291e02f9dc3b2fb",
+    "content-hash": "d7530d3211cd902e60cab5610173fcdf",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -173,6 +173,42 @@
                 }
             ],
             "time": "2020-08-19T22:52:38+00:00"
+        },
+        {
+            "name": "brunocfalcao/incidents-total-card",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./nova-components/IncidentsTotalCard",
+                "reference": "8279fcfbac9f39e330490d5b649e5745a7542d0a"
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Brunocfalcao\\IncidentsTotalCard\\CardServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Brunocfalcao\\IncidentsTotalCard\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "A Laravel Nova card.",
+            "keywords": [
+                "laravel",
+                "nova"
+            ],
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "cakephp/chronos",
@@ -3961,16 +3997,16 @@
         },
         {
             "name": "spatie/ray",
-            "version": "1.7.2",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/ray.git",
-                "reference": "7867c3d93ee55806cb901ca42d81d68ac364088f"
+                "reference": "d229fd4ccd8f4ed39ddb628d3d788812cc6c1851"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/ray/zipball/7867c3d93ee55806cb901ca42d81d68ac364088f",
-                "reference": "7867c3d93ee55806cb901ca42d81d68ac364088f",
+                "url": "https://api.github.com/repos/spatie/ray/zipball/d229fd4ccd8f4ed39ddb628d3d788812cc6c1851",
+                "reference": "d229fd4ccd8f4ed39ddb628d3d788812cc6c1851",
                 "shasum": ""
             },
             "require": {
@@ -4017,7 +4053,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/ray/issues",
-                "source": "https://github.com/spatie/ray/tree/1.7.2"
+                "source": "https://github.com/spatie/ray/tree/1.8.0"
             },
             "funding": [
                 {
@@ -4029,7 +4065,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2021-01-13T22:00:06+00:00"
+            "time": "2021-01-14T12:19:54+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
