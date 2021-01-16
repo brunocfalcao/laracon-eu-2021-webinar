@@ -44,7 +44,7 @@ class PriorityPolicy extends AbstractPolicy
      */
     public function create(User $user)
     {
-        return true;
+        return $user->isAdmin();
     }
 
     /**
@@ -56,7 +56,7 @@ class PriorityPolicy extends AbstractPolicy
      */
     public function update(User $user, Priority $priority)
     {
-        return true;
+        return $user->isAdmin();
     }
 
     /**
@@ -68,7 +68,7 @@ class PriorityPolicy extends AbstractPolicy
      */
     public function delete(User $user, Priority $priority)
     {
-        return true;
+        return $user->isAdmin();
     }
 
     /**
@@ -80,7 +80,7 @@ class PriorityPolicy extends AbstractPolicy
      */
     public function restore(User $user, Priority $priority)
     {
-        return true;
+        return $user->isAdmin();
     }
 
     /**
@@ -92,6 +92,6 @@ class PriorityPolicy extends AbstractPolicy
      */
     public function forceDelete(User $user, Priority $priority)
     {
-        return true;
+        return $user->isAdmin();
     }
 }

@@ -5,15 +5,16 @@ namespace App\Nova;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
+use App\Nova\Lenses\MyIncidents;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\BelongsTo;
 use App\Models\Status as StatusModel;
 use Laravel\Nova\Fields\BelongsToMany;
 use App\Nova\Filters\IncidentStatusFilter;
-use App\Nova\Lenses\MostImportantIncidents;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use App\Nova\Filters\IncidentCategoryFilter;
+use App\Nova\Actions\AssignIncidentToOperatorAction;
 use Brunocfalcao\MyTotalIncidentsCard\MyTotalIncidentsCard;
 
 class Incident extends AbstractResource
@@ -136,7 +137,7 @@ class Incident extends AbstractResource
     public function lenses(Request $request)
     {
         return [
-            new MostImportantIncidents(),
+            new MyIncidents(),
         ];
     }
 
@@ -148,6 +149,8 @@ class Incident extends AbstractResource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [
+            new AssignIncidentToOperatorAction()
+        ];
     }
 }

@@ -37,13 +37,10 @@ class TotalIncidentsMetric extends Value
     public function ranges()
     {
         return [
+            2 => __('Last 2 Days'),
             5 => __('Last 5 Days'),
-            7 => __('Last 7 Days'),
             10 => __('Last 10 Days'),
             'TODAY' => __('Today'),
-            'MTD' => __('Month To Date'),
-            'QTD' => __('Quarter To Date'),
-            'YTD' => __('Year To Date'),
         ];
     }
 

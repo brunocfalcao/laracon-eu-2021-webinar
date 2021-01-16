@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Scopes\IncidentsScope;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Incident extends Model
 {
@@ -11,11 +13,21 @@ class Incident extends Model
 
     protected $guarded = [];
 
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        //static::addGlobalScope(new IncidentsScope());
+    }
+
     public function tags()
     {
         return $this->belongsToMany(Tag::class)
-                    ->withPivot('comments')
-                    ->withTimestamps();
+            ->withPivot('comments')
+            ->withTimestamps();
     }
 
     public function user()

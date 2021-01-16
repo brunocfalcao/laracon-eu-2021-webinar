@@ -38,11 +38,9 @@ class IncidentsPerDayMetric extends Trend
     public function ranges()
     {
         return [
+            2 => __('2 Days'),
             5 => __('5 Days'),
-            7 => __('7 Days'),
             10 => __('10 Days'),
-            15 => __('15 Days'),
-            90 => __('90 Days'),
         ];
     }
 

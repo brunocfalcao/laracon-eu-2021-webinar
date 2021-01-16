@@ -56,7 +56,9 @@ class IncidentPolicy extends AbstractPolicy
      */
     public function update(User $user, Incident $incident)
     {
-        return optional($incident->user)->id == $user->id;
+        return optional($incident->user)->id == $user->id ||
+               $user->isAdmin() ||
+               $user->isCoordinator();
     }
 
     /**
@@ -68,7 +70,7 @@ class IncidentPolicy extends AbstractPolicy
      */
     public function delete(User $user, Incident $incident)
     {
-        return true;
+        return $user->isAdmin();
     }
 
     /**
@@ -80,7 +82,7 @@ class IncidentPolicy extends AbstractPolicy
      */
     public function restore(User $user, Incident $incident)
     {
-        return true;
+        return $user->isAdmin();
     }
 
     /**
@@ -92,6 +94,6 @@ class IncidentPolicy extends AbstractPolicy
      */
     public function forceDelete(User $user, Incident $incident)
     {
-        return true;
+        return $user->isAdmin();
     }
 }

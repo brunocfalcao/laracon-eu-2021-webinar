@@ -21,6 +21,7 @@
     ],
     "require": {
         "php": "^7.3|^8.0",
+        "brunocfalcao/my-total-incidents-card": "*",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -28,9 +29,9 @@
         "laravel/nova": "*",
         "laravel/tinker": "^2.5",
         "matt-allan/laravel-code-style": "^0.6.0",
+        "optimistdigital/nova-tailwind": "^1.0",
         "spatie/laravel-ray": "^1.1",
-        "wildbit/swiftmailer-postmark": "^3.3",
-        "brunocfalcao/my-total-incidents-card": "*"
+        "wildbit/swiftmailer-postmark": "^3.3"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

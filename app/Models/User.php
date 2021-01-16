@@ -31,4 +31,14 @@ class User extends Authenticatable
     {
         return $this->profile->name == 'Admin';
     }
+
+    public function isCoordinator()
+    {
+        return $this->profile->name == 'Coordinator';
+    }
+
+    public function scopeOperatorsOnly($query)
+    {
+        return $query->where('profile_id', Profile::firstWhere('name', 'Operator')->id);
+    }
 }

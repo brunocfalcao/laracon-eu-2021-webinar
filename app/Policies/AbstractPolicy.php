@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -20,7 +21,12 @@ class AbstractPolicy
      */
     public function viewAny(User $user)
     {
-        // Appears on navigation sidebar?
+        // User is admin? Can see everything.
+        if ($user->isAdmin()) {
+            return true;
+        }
+
+        // Hide in sidebar in case the user is not admin.
         if (!$user->isAdmin() && empty(request()->resource)) {
             return false;
         };
@@ -31,7 +37,8 @@ class AbstractPolicy
          */
         if (resolve(NovaRequest::class)->isResourceIndexRequest() &&
            request()->resource == $this->uriKey &&
-           empty(request()->viaResource)) {
+           empty(request()->viaResource) &&
+           $user->isAdmin()) {
             return false;
         };
 

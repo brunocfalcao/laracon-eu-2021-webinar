@@ -44,7 +44,7 @@ class ProfilePolicy extends AbstractPolicy
      */
     public function create(User $user)
     {
-        return true;
+        return $user->isAdmin();
     }
 
     /**
@@ -56,7 +56,7 @@ class ProfilePolicy extends AbstractPolicy
      */
     public function update(User $user, Profile $profile)
     {
-        return true;
+        return $user->isAdmin();
     }
 
     /**
@@ -68,7 +68,7 @@ class ProfilePolicy extends AbstractPolicy
      */
     public function delete(User $user, Profile $profile)
     {
-        return true;
+        return $user->isAdmin();
     }
 
     /**
@@ -80,7 +80,7 @@ class ProfilePolicy extends AbstractPolicy
      */
     public function restore(User $user, Profile $profile)
     {
-        return true;
+        return $user->isAdmin();
     }
 
     /**
@@ -92,6 +92,6 @@ class ProfilePolicy extends AbstractPolicy
      */
     public function forceDelete(User $user, Profile $profile)
     {
-        return true;
+        return $user->isAdmin();
     }
 }

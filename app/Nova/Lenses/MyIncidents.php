@@ -2,18 +2,26 @@
 
 namespace App\Nova\Lenses;
 
+use App\Nova\Status;
 use App\Nova\Priority;
 use App\Nova\Requester;
-use Illuminate\Http\Request;
-use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
+use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Textarea;
-use Laravel\Nova\Http\Requests\LensRequest;
 use Laravel\Nova\Lenses\Lens;
+use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Http\Requests\LensRequest;
 
-class MostImportantIncidents extends Lens
+class MyIncidents extends Lens
 {
+    /**
+     * The displayable name of the lens.
+     *
+     * @var string
+     */
+    public $name = 'Only my Incidents';
+
     /**
      * Get the query builder / paginator for the lens.
      *
@@ -52,6 +60,9 @@ class MostImportantIncidents extends Lens
                     ->displayUsing(function ($description) {
                         return substr($description, 0, 50);
                     }),
+
+            BelongsTo::make('Status', 'status', Status::class)
+                     ->searchable(),
 
             BelongsTo::make('Requester', 'requester', Requester::class)
                      ->searchable()
@@ -103,6 +114,6 @@ class MostImportantIncidents extends Lens
      */
     public function uriKey()
     {
-        return 'most-important-incidents';
+        return 'my-incidents';
     }
 }
