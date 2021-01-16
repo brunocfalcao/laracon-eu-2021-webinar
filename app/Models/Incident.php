@@ -77,4 +77,9 @@ class Incident extends Model
                ! $this->isClosed() &&
                $this->wasChanged();
     }
+
+    public function scopeAssignedToMyself()
+    {
+        return $this->where('user_id', request()->user()->id);
+    }
 }

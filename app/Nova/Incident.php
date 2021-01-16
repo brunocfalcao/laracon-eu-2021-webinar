@@ -2,19 +2,42 @@
 
 namespace App\Nova;
 
-use App\Nova\Filters\IncidentCategoryFilter;
+use Laravel\Nova\Fields\ID;
+use Illuminate\Http\Request;
+use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Fields\BelongsTo;
+use App\Models\Status as StatusModel;
+use Laravel\Nova\Fields\BelongsToMany;
 use App\Nova\Filters\IncidentStatusFilter;
 use App\Nova\Lenses\MostImportantIncidents;
-use Illuminate\Http\Request;
-use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\BelongsToMany;
-use Laravel\Nova\Fields\HasMany;
-use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Http\Requests\NovaRequest;
+use App\Nova\Filters\IncidentCategoryFilter;
+use Brunocfalcao\MyTotalIncidentsCard\MyTotalIncidentsCard;
 
 class Incident extends AbstractResource
 {
+    /**
+     * Build an "index" query for the given resource.
+     *
+     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+        /**
+         * Shows the incidents assigned to the own user if he is not
+         * admin.
+         */
+        if (!$request->user()->isAdmin()) {
+            return $query->where('user_id', $request->user()->id)
+                         ->orWhere('status_id', StatusModel::firstWhere('name', 'New')
+                                                      ->id);
+        }
+    }
+
     /**
      * The model the resource corresponds to.
      *
@@ -85,7 +108,9 @@ class Incident extends AbstractResource
      */
     public function cards(Request $request)
     {
-        return [];
+        return [
+            new MyTotalIncidentsCard()
+        ];
     }
 
     /**

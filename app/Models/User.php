@@ -26,4 +26,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Incident::class);
     }
+
+    public function isAdmin()
+    {
+        return $this->profile->name == 'Admin';
+    }
 }

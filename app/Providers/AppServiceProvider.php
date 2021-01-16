@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Spatie\Ray\Ray;
 use App\Models\Incident;
 use App\Observers\IncidentObserver;
 use Illuminate\Support\ServiceProvider;

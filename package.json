@@ -15,7 +15,11 @@
         "build-total-incidents": "cd nova-components/TotalIncidents && npm run dev",
         "build-total-incidents-prod": "cd nova-components/TotalIncidents && npm run prod",
         "build-incidents-total-card": "cd nova-components/IncidentsTotalCard && npm run dev",
-        "build-incidents-total-card-prod": "cd nova-components/IncidentsTotalCard && npm run prod"
+        "build-incidents-total-card-prod": "cd nova-components/IncidentsTotalCard && npm run prod",
+        "build-my-total-tickets-card": "cd nova-components/MyTotalTicketsCard && npm run dev",
+        "build-my-total-tickets-card-prod": "cd nova-components/MyTotalTicketsCard && npm run prod",
+        "build-my-total-incidents-card": "cd nova-components/MyTotalIncidentsCard && npm run dev",
+        "build-my-total-incidents-card-prod": "cd nova-components/MyTotalIncidentsCard && npm run prod"
     },
     "devDependencies": {
         "axios": "^0.19",

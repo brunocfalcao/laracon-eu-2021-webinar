@@ -23,9 +23,12 @@ class MostImportantIncidents extends Lens
      */
     public static function query(LensRequest $request, $query)
     {
-        return $request->withOrdering($request->withFilters(
-            $query
-        ))->orderBy('priority_id', 'desc');
+        return $request
+                    ->withOrdering(
+                        $request->withFilters($query)
+                    )
+                    ->where('user_id', $request->user()->id)
+                    ->orderBy('priority_id', 'desc');
     }
 
     /**

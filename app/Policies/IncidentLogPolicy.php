@@ -2,14 +2,17 @@
 
 namespace App\Policies;
 
-use App\Models\IncidentLog;
 use App\Models\User;
-use Illuminate\Auth\Access\HandlesAuthorization;
+use App\Models\IncidentLog;
+use App\Policies\AbstractPolicy;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
-class IncidentLogPolicy
+class IncidentLogPolicy extends AbstractPolicy
 {
     use HandlesAuthorization;
+
+    protected $uriKey = 'incident-logs';
 
     /**
      * Determine whether the user can view any models.
@@ -19,19 +22,7 @@ class IncidentLogPolicy
      */
     public function viewAny(User $user)
     {
-        /*
-         * This codebase will guarantee that the incident logs only appear
-         * on related resource relationship data, and never as the main
-         * resource Incident Log being managed.
-
-        if (resolve(NovaRequest::class)->isResourceIndexRequest() &&
-           request()->resource == 'incident-logs' &&
-           empty(request()->viaResource)) {
-            return false;
-        }
-        */
-
-        return true;
+        return parent::viewAny($user);
     }
 
     /**
@@ -54,7 +45,7 @@ class IncidentLogPolicy
      */
     public function create(User $user)
     {
-        //
+        return false;
     }
 
     /**
@@ -66,7 +57,7 @@ class IncidentLogPolicy
      */
     public function update(User $user, IncidentLog $incidentLog)
     {
-        //
+        return false;
     }
 
     /**
@@ -78,7 +69,7 @@ class IncidentLogPolicy
      */
     public function delete(User $user, IncidentLog $incidentLog)
     {
-        //
+        return false;
     }
 
     /**
@@ -90,7 +81,7 @@ class IncidentLogPolicy
      */
     public function restore(User $user, IncidentLog $incidentLog)
     {
-        //
+        return false;
     }
 
     /**
@@ -102,6 +93,6 @@ class IncidentLogPolicy
      */
     public function forceDelete(User $user, IncidentLog $incidentLog)
     {
-        //
+        return false;
     }
 }

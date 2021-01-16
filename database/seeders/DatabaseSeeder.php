@@ -68,12 +68,20 @@ class DatabaseSeeder extends Seeder
         User::whereNull('profile_id')
             ->update(['profile_id' => Profile::firstWhere('name', 'Non-Admin')->id]);
 
-        // Add a specific user.
+        // Add a specific user - Admin.
         User::create([
             'name' => 'Bruno Falcao',
             'password' => bcrypt('honda'),
             'email' => 'bruno@masteringnova.com',
             'profile_id' => Profile::firstWhere('name', 'Admin')->id,
+        ]);
+
+        // Add a specific user - Admin.
+        User::create([
+            'name' => 'Peter James',
+            'password' => bcrypt('honda'),
+            'email' => 'peter@masteringnova.com',
+            'profile_id' => Profile::firstWhere('name', 'Non-Admin')->id,
         ]);
 
         // Create a random number of requesters.
@@ -231,26 +239,28 @@ class DatabaseSeeder extends Seeder
             }
         }
 
+        // Create a random number of incidents created today.
+        Incident::factory()
+                ->count(rand(10, 50))
+                ->make()
+                ->each(function ($incident) {
+                    $incident->status()->associate(Status::find(1));
+
+                    $incident->requester()
+                             ->associate(Requester::inRandomOrder()->first());
+
+                    $incident->severity()
+                             ->associate(Severity::inRandomOrder()->first());
+
+                    $incident->priority()
+                             ->associate(Priority::inRandomOrder()->first());
+
+                    $incident->category()
+                             ->associate(Category::inRandomOrder()->first());
+
+                    $incident->save();
+                });
+
         return;
-
-        $incident = new Incident();
-        $incident->requester()->associate(Requester::find(1));
-        $incident->title = $faker->sentence();
-        $incident->description = $faker->paragraph();
-        $incident->updated_at = now()->subHours(rand(120, 240));
-        $incident->created_at = $incident->updated_at;
-        $incident->save();
-
-        $incident->user_id = 2;
-        $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24 * 3600));
-        $incident->save();
-
-        $incident->user_id = 4;
-        $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24 * 3600));
-        $incident->save();
-
-        $incident->title = 'My title was changed';
-        $incident->updated_at = $incident->updated_at->addSeconds(rand(3600, 24 * 3600));
-        $incident->save();
     }
 }
