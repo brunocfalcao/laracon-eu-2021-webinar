@@ -76,7 +76,7 @@ module.exports = __webpack_require__(6);
 /***/ (function(module, exports, __webpack_require__) {
 
 Nova.booting(function (Vue, router, store) {
-	Vue.component('my-total-incidents-card', __webpack_require__(2));
+  Vue.component('my-total-incidents-card', __webpack_require__(2));
 });
 
 /***/ }),
@@ -250,15 +250,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            total: this.card.total
-        };
-    },
-
-
     props: ['card'],
 
     mounted: function mounted() {
@@ -274,21 +272,28 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "card",
-    { staticClass: "flex justify-center flex-col items-center" },
-    [
-      _c("div", [
-        _c("h1", { staticClass: "font-bold text-xl text-80 font-light" }, [
-          _vm._v("My Total Incidents")
-        ]),
-        _vm._v(" "),
-        _c("h2", { staticClass: "pt-6 text-center text-primary" }, [
-          _vm._v(_vm._s(_vm.total))
+  return _c("card", { staticClass: "flex items-center" }, [
+    _c("div", { staticClass: "pl-6 py-3 flex items-center" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "bg-green-500 w-16 h-16 flex items-center justify-center rounded-lg"
+        },
+        [
+          _c("i", {
+            staticClass: "text-2xl text-white fas fa-chalkboard-teacher"
+          })
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "pl-8" }, [
+        _c("p", { staticClass: "text-2xl font-bold" }, [
+          _vm._v(_vm._s(_vm.card.total) + " Incidents assigned to me")
         ])
       ])
-    ]
-  )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

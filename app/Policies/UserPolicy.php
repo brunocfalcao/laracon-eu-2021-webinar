@@ -3,7 +3,6 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Policies\AbstractPolicy;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class UserPolicy extends AbstractPolicy

@@ -2,10 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\User;
 use App\Models\IncidentLog;
-use App\Policies\AbstractPolicy;
-use Laravel\Nova\Http\Requests\NovaRequest;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class IncidentLogPolicy extends AbstractPolicy

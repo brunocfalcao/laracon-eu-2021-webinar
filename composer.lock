@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "49385b7abac4e98b4b5b74ddb2887d92",
+    "content-hash": "fb870f43f6446659e76710c9b45d0411",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -175,6 +175,78 @@
             "time": "2020-08-19T22:52:38+00:00"
         },
         {
+            "name": "brunocfalcao/fa-text",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./nova-components/FaText",
+                "reference": "7289e506e023e9266b967c3f57c3a43be2f018ec"
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Brunocfalcao\\FaText\\FieldServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Brunocfalcao\\FaText\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "A Laravel Nova field.",
+            "keywords": [
+                "laravel",
+                "nova"
+            ],
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "brunocfalcao/my-total-incidents-async-card",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./nova-components/MyTotalIncidentsAsyncCard",
+                "reference": "61ddd35f4bff84c4f3b9d199c4a124b5e12b272c"
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Brunocfalcao\\MyTotalIncidentsAsyncCard\\CardServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Brunocfalcao\\MyTotalIncidentsAsyncCard\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "A Laravel Nova card.",
+            "keywords": [
+                "laravel",
+                "nova"
+            ],
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
             "name": "brunocfalcao/my-total-incidents-card",
             "version": "dev-master",
             "dist": {
@@ -202,6 +274,42 @@
                 "MIT"
             ],
             "description": "A Laravel Nova card.",
+            "keywords": [
+                "laravel",
+                "nova"
+            ],
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "brunocfalcao/universal-blade-tool",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./nova-components/UniversalBladeTool",
+                "reference": "155f43d3ae122f54aa430620ac1c0c01abb9b435"
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Brunocfalcao\\UniversalBladeTool\\ToolServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Brunocfalcao\\UniversalBladeTool\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "A Laravel Nova tool.",
             "keywords": [
                 "laravel",
                 "nova"
@@ -3868,16 +3976,16 @@
         },
         {
             "name": "spatie/laravel-ray",
-            "version": "1.6.1",
+            "version": "1.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-ray.git",
-                "reference": "8bd8cf610590549663d5c685f25b1507941a0b14"
+                "reference": "3f0a23f085e96238420746a25c776f2b98fc2610"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-ray/zipball/8bd8cf610590549663d5c685f25b1507941a0b14",
-                "reference": "8bd8cf610590549663d5c685f25b1507941a0b14",
+                "url": "https://api.github.com/repos/spatie/laravel-ray/zipball/3f0a23f085e96238420746a25c776f2b98fc2610",
+                "reference": "3f0a23f085e96238420746a25c776f2b98fc2610",
                 "shasum": ""
             },
             "require": {
@@ -3887,7 +3995,7 @@
                 "php": "^7.4|^8.0",
                 "spatie/backtrace": "^1.0",
                 "spatie/ray": "^1.7.2",
-                "symfony/stopwatch": "4.2|^5.2",
+                "symfony/stopwatch": "4.2|^5.1",
                 "zbateson/mail-mime-parser": "^1.3"
             },
             "require-dev": {
@@ -3930,7 +4038,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-ray/issues",
-                "source": "https://github.com/spatie/laravel-ray/tree/1.6.1"
+                "source": "https://github.com/spatie/laravel-ray/tree/1.7.1"
             },
             "funding": [
                 {
@@ -3942,7 +4050,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2021-01-15T09:51:00+00:00"
+            "time": "2021-01-17T12:15:02+00:00"
         },
         {
             "name": "spatie/macroable",
@@ -8623,16 +8731,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "9.5.0",
+            "version": "9.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "8e16c225d57c3d6808014df6b1dd7598d0a5bbbe"
+                "reference": "e7bdf4085de85a825f4424eae52c99a1cec2f360"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/8e16c225d57c3d6808014df6b1dd7598d0a5bbbe",
-                "reference": "8e16c225d57c3d6808014df6b1dd7598d0a5bbbe",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/e7bdf4085de85a825f4424eae52c99a1cec2f360",
+                "reference": "e7bdf4085de85a825f4424eae52c99a1cec2f360",
                 "shasum": ""
             },
             "require": {
@@ -8710,7 +8818,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.0"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.1"
             },
             "funding": [
                 {
@@ -8722,7 +8830,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-12-04T05:05:53+00:00"
+            "time": "2021-01-17T07:42:25+00:00"
         },
         {
             "name": "sebastian/cli-parser",

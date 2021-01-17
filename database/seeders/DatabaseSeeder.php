@@ -108,25 +108,23 @@ class DatabaseSeeder extends Seeder
          * Create Incidents from the past 180 days. Each day will have a
          * random number of incidents, and a random workflow state (1 to 7).
          **/
-
         $daysAgo = 10;
 
         for ($i = $daysAgo; $i >= 0; $i--) {
             $incident = $this->newIncident($i, true, rand(1, 10))
                              ->each(function ($incident) use ($faker) {
+                                 $type = rand(1, 7);
 
-                                $type = rand(1, 7);
+                                 $totalTags = Tag::all()->count();
+                                 // Also attach tags to the incident.
+                                 $times = rand(1, $totalTags);
 
-                                $totalTags = Tag::all()->count();
-                                // Also attach tags to the incident.
-                                $times = rand(1, $totalTags);
+                                 for ($i = 0; $i < $times; $i++) {
+                                     $randomTag = Tag::inRandomOrder()->first();
+                                     $incident->tags()->attach($randomTag->id, ['comments' => $faker->sentence()]);
+                                 }
 
-                                for ($i = 0; $i < $times; $i++) {
-                                    $randomTag = Tag::inRandomOrder()->first();
-                                    $incident->tags()->attach($randomTag->id, ['comments' => $faker->sentence()]);
-                                }
-
-                                switch ($type) {
+                                 switch ($type) {
                                     case 1:
                                         // The non-assigned incident. Do nothing.
                                         break;
@@ -228,7 +226,7 @@ class DatabaseSeeder extends Seeder
                                         break;
                                 }
                              });
-        };
+        }
 
         // Create a random number of incidents created today.
         $this->newIncident(0, true, rand(1, 10));

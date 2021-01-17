@@ -16,6 +16,7 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 use App\Nova\Filters\IncidentCategoryFilter;
 use App\Nova\Actions\AssignIncidentToOperatorAction;
 use Brunocfalcao\MyTotalIncidentsCard\MyTotalIncidentsCard;
+use Brunocfalcao\MyTotalIncidentsAsyncCard\MyTotalIncidentsAsyncCard;
 
 class Incident extends AbstractResource
 {
@@ -28,15 +29,18 @@ class Incident extends AbstractResource
      */
     public static function indexQuery(NovaRequest $request, $query)
     {
-        /**
+        return $query;
+        /*
          * Shows the incidents assigned to the own user if he is not
          * admin.
          */
+        /*
         if (!$request->user()->isAdmin()) {
             return $query->where('user_id', $request->user()->id)
                          ->orWhere('status_id', StatusModel::firstWhere('name', 'New')
                                                       ->id);
         }
+        */
     }
 
     /**
@@ -110,7 +114,10 @@ class Incident extends AbstractResource
     public function cards(Request $request)
     {
         return [
-            new MyTotalIncidentsCard()
+            (new MyTotalIncidentsCard())
+                ->withMeta(['total' => Incident::assignedToMyself()->count()]),
+
+            new MyTotalIncidentsAsyncCard()
         ];
     }
 
@@ -150,7 +157,7 @@ class Incident extends AbstractResource
     public function actions(Request $request)
     {
         return [
-            new AssignIncidentToOperatorAction()
+            new AssignIncidentToOperatorAction(),
         ];
     }
 }

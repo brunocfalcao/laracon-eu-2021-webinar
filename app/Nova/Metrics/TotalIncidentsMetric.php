@@ -3,13 +3,13 @@
 namespace App\Nova\Metrics;
 
 use App\Models\Incident;
-use Laravel\Nova\Metrics\Value;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Metrics\Value;
 
 class TotalIncidentsMetric extends Value
 {
     /**
-     * Get the displayable name of the metric
+     * Get the displayable name of the metric.
      *
      * @return string
      */

@@ -2,9 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\User;
 use App\Models\Severity;
-use App\Policies\AbstractPolicy;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class SeverityPolicy extends AbstractPolicy

@@ -2,11 +2,10 @@
 
 namespace App\Nova\Dashboards;
 
-use Laravel\Nova\Dashboard;
-use App\Nova\Metrics\TotalIncidentsMetric;
-use App\Nova\Metrics\IncidentsPerDayMetric;
 use App\Nova\Metrics\IncidentsByCategoryMetric;
-use Brunocfalcao\MyTotalTicketsCard\MyTotalTicketsCard;
+use App\Nova\Metrics\IncidentsPerDayMetric;
+use App\Nova\Metrics\TotalIncidentsMetric;
+use Laravel\Nova\Dashboard;
 
 class TicketInsights extends Dashboard
 {
@@ -30,7 +29,7 @@ class TicketInsights extends Dashboard
         return [
             new TotalIncidentsMetric(),
             new IncidentsPerDayMetric(),
-            new IncidentsByCategoryMetric()
+            new IncidentsByCategoryMetric(),
         ];
     }
 

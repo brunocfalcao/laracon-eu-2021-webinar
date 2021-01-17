@@ -4,13 +4,13 @@ namespace App\Nova\Metrics;
 
 use App\Models\Category;
 use App\Models\Incident;
-use Laravel\Nova\Metrics\Partition;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Metrics\Partition;
 
 class IncidentsByCategoryMetric extends Partition
 {
     /**
-     * Get the displayable name of the metric
+     * Get the displayable name of the metric.
      *
      * @return string
      */
@@ -33,7 +33,6 @@ class IncidentsByCategoryMetric extends Partition
                     ->label(function ($value) use ($labels) {
                         return $labels[$value];
                     });
-        ;
     }
 
     /**

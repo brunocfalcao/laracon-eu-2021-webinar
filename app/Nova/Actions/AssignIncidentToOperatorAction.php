@@ -2,15 +2,14 @@
 
 namespace App\Nova\Actions;
 
-use App\Models\User;
 use App\Models\Status;
+use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Laravel\Nova\Fields\Select;
-use Laravel\Nova\Actions\Action;
-use Illuminate\Support\Collection;
-use Laravel\Nova\Fields\ActionFields;
 use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Collection;
+use Laravel\Nova\Actions\Action;
+use Laravel\Nova\Fields\ActionFields;
+use Laravel\Nova\Fields\Select;
 
 class AssignIncidentToOperatorAction extends Action
 {

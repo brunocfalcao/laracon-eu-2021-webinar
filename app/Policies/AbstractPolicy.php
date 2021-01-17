@@ -3,9 +3,8 @@
 namespace App\Policies;
 
 use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
-use Laravel\Nova\Http\Requests\NovaRequest;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Laravel\Nova\Http\Requests\NovaRequest;
 
 class AbstractPolicy
 {
@@ -27,9 +26,9 @@ class AbstractPolicy
         }
 
         // Hide in sidebar in case the user is not admin.
-        if (!$user->isAdmin() && empty(request()->resource)) {
+        if (! $user->isAdmin() && empty(request()->resource)) {
             return false;
-        };
+        }
 
         /*
          * The incident logs only appear on related resource relationship data
@@ -37,10 +36,9 @@ class AbstractPolicy
          */
         if (resolve(NovaRequest::class)->isResourceIndexRequest() &&
            request()->resource == $this->uriKey &&
-           empty(request()->viaResource) &&
-           $user->isAdmin()) {
+           empty(request()->viaResource)) {
             return false;
-        };
+        }
 
         return true;
     }

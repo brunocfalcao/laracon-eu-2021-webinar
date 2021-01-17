@@ -2,9 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\User;
 use App\Models\Requester;
-use App\Policies\AbstractPolicy;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class RequesterPolicy extends AbstractPolicy

@@ -2,10 +2,10 @@
 
 namespace App\Scopes;
 
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class IncidentsScope implements Scope
 {
@@ -18,7 +18,7 @@ class IncidentsScope implements Scope
      */
     public function apply(Builder $builder, Model $model)
     {
-        if (!Auth::user()->isAdmin()) {
+        if (! Auth::user()->isAdmin()) {
             // Scope the user to see only his assigned incidents.
             $builder->where('user_id', Auth::id());
         }

@@ -19,7 +19,15 @@
         "build-my-total-tickets-card": "cd nova-components/MyTotalTicketsCard && npm run dev",
         "build-my-total-tickets-card-prod": "cd nova-components/MyTotalTicketsCard && npm run prod",
         "build-my-total-incidents-card": "cd nova-components/MyTotalIncidentsCard && npm run dev",
-        "build-my-total-incidents-card-prod": "cd nova-components/MyTotalIncidentsCard && npm run prod"
+        "build-my-total-incidents-card-prod": "cd nova-components/MyTotalIncidentsCard && npm run prod",
+        "build-fa-field": "cd nova-components/FaField && npm run dev",
+        "build-fa-field-prod": "cd nova-components/FaField && npm run prod",
+        "build-fa-text": "cd nova-components/FaText && npm run dev",
+        "build-fa-text-prod": "cd nova-components/FaText && npm run prod",
+        "build-my-total-incidents-async-card": "cd nova-components/MyTotalIncidentsAsyncCard && npm run dev",
+        "build-my-total-incidents-async-card-prod": "cd nova-components/MyTotalIncidentsAsyncCard && npm run prod",
+        "build-universal-blade-tool": "cd nova-components/UniversalBladeTool && npm run dev",
+        "build-universal-blade-tool-prod": "cd nova-components/UniversalBladeTool && npm run prod"
     },
     "devDependencies": {
         "axios": "^0.19",
