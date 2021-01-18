@@ -169,7 +169,7 @@ exports = module.exports = __webpack_require__(5)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Scoped Styles */\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Scoped Styles */\n", ""]);
 
 // exports
 
@@ -651,11 +651,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     data: function data() {
         return {
-            html: '<h1>Hi there!</h1>'
+            html: 'Hi there!',
+            loading: false
         };
     },
     mounted: function mounted() {
-        //
+        this.fetch();
+    },
+
+    methods: {
+        fetch: function fetch() {
+            var _this = this;
+
+            this.loading = true;
+            Nova.request().get('/nova-vendor/universal-blade-tool/endpoint', null).then(function (response) {
+                _this.loading = false;
+                _this.html = response.data;
+            }).catch(function (_ref) {
+                var response = _ref.response;
+
+                _this.loading = false;
+            });
+        },
+        payload: function payload() {
+            return {
+                params: {
+                    cardClass: this.card.cardClass
+                }
+            };
+        }
     }
 });
 
@@ -672,7 +696,16 @@ var render = function() {
     [
       _c("heading", { staticClass: "mb-6" }, [_vm._v("Universal Blade Tool")]),
       _vm._v(" "),
-      _c("card", {}, [_c("div", { domProps: { innerHTML: _vm._s(_vm.html) } })])
+      _c(
+        "loading-card",
+        { staticClass: "flex items-center", attrs: { loading: _vm.loading } },
+        [
+          _c("div", {
+            staticClass: "px-6 py-6",
+            domProps: { innerHTML: _vm._s(_vm.html) }
+          })
+        ]
+      )
     ],
     1
   )

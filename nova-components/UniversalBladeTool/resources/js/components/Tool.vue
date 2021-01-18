@@ -2,9 +2,9 @@
     <div>
         <heading class="mb-6">Universal Blade Tool</heading>
 
-        <card class="">
-            <div v-html="html"></div>
-        </card>
+        <loading-card :loading="loading" class="flex items-center">
+            <div class="px-6 py-6" v-html="html"></div>
+        </loading-card>
     </div>
 </template>
 
@@ -17,12 +17,33 @@ export default {
     },
     data() {
         return {
-            html: '<h1>Hi there!</h1>'
+            html: 'Hi there!',
+            loading:false
         }
     },
-
     mounted() {
-        //
+        this.fetch()
+    },
+    methods: {
+        fetch() {
+            this.loading = true;
+            Nova.request()
+                .get('/nova-vendor/universal-blade-tool/endpoint', null)
+                .then(response => {
+                    this.loading = false;
+                    this.html = response.data;
+                })
+                .catch(({response}) => {
+                    this.loading = false;
+                })
+        },
+        payload() {
+            return {
+                params: {
+                    cardClass: this.card.cardClass
+                }
+            };
+        },
     },
 }
 </script>

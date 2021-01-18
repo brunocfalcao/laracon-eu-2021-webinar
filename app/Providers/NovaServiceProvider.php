@@ -2,12 +2,12 @@
 
 namespace App\Providers;
 
-use Laravel\Nova\Nova;
-use Laravel\Nova\Cards\Help;
-use Illuminate\Support\Facades\Gate;
 use App\Nova\Dashboards\TicketInsights;
-use Laravel\Nova\NovaApplicationServiceProvider;
 use Brunocfalcao\UniversalBladeTool\UniversalBladeTool;
+use Illuminate\Support\Facades\Gate;
+use Laravel\Nova\Cards\Help;
+use Laravel\Nova\Nova;
+use Laravel\Nova\NovaApplicationServiceProvider;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -82,7 +82,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     public function tools()
     {
         return [
-            new UniversalBladeTool()
+            new UniversalBladeTool(),
         ];
     }
 

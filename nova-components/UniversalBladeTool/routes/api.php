@@ -14,6 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/endpoint', function (Request $request) {
-//     //
-// });
+Route::get('/endpoint', function (Request $request) {
+    return view('universal-blade-tool::phpinfo');
+});
