@@ -6,11 +6,9 @@ use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class TagPolicy extends AbstractPolicy
+class TagPolicy
 {
     use HandlesAuthorization;
-
-    protected $uriKey = 'tags';
 
     /**
      * Determine whether the user can view any models.
@@ -20,7 +18,7 @@ class TagPolicy extends AbstractPolicy
      */
     public function viewAny(User $user)
     {
-        return parent::viewAny($user);
+        return true;
     }
 
     /**
@@ -32,7 +30,7 @@ class TagPolicy extends AbstractPolicy
      */
     public function view(User $user, Tag $tag)
     {
-        return true;
+        //
     }
 
     /**
@@ -43,7 +41,7 @@ class TagPolicy extends AbstractPolicy
      */
     public function create(User $user)
     {
-        return $user->isAdmin();
+        //
     }
 
     /**
@@ -55,7 +53,7 @@ class TagPolicy extends AbstractPolicy
      */
     public function update(User $user, Tag $tag)
     {
-        return $user->isAdmin();
+        //
     }
 
     /**
@@ -67,7 +65,7 @@ class TagPolicy extends AbstractPolicy
      */
     public function delete(User $user, Tag $tag)
     {
-        return $user->isAdmin();
+        //
     }
 
     /**
@@ -79,7 +77,7 @@ class TagPolicy extends AbstractPolicy
      */
     public function restore(User $user, Tag $tag)
     {
-        return $user->isAdmin();
+        //
     }
 
     /**
@@ -91,6 +89,6 @@ class TagPolicy extends AbstractPolicy
      */
     public function forceDelete(User $user, Tag $tag)
     {
-        return $user->isAdmin();
+        //
     }
 }

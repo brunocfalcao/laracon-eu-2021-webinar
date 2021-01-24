@@ -20,15 +20,11 @@
         },
         {
             "type": "path",
-            "url": "./nova-components/MyTotalIncidentsCard"
+            "url": "./nova-components/MyIncidentsCard"
         },
         {
             "type": "path",
-            "url": "./nova-components/MyTotalIncidentsAsyncCard"
-        },
-        {
-            "type": "path",
-            "url": "./nova-components/UniversalBladeTool"
+            "url": "./nova-components/BladeView"
         }
     ],
     "require": {
@@ -41,12 +37,10 @@
         "laravel/tinker": "^2.5",
         "matt-allan/laravel-code-style": "^0.6.0",
         "optimistdigital/nova-tailwind": "^1.0",
-        "spatie/laravel-ray": "^1.1",
         "wildbit/swiftmailer-postmark": "^3.3",
         "brunocfalcao/fa-text": "*",
-        "brunocfalcao/my-total-incidents-card": "*",
-        "brunocfalcao/my-total-incidents-async-card": "*",
-        "brunocfalcao/universal-blade-tool": "*"
+        "brunocfalcao/my-incidents-card": "*",
+        "brunocfalcao/blade-view": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

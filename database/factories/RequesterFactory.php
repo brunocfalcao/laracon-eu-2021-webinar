@@ -24,6 +24,12 @@ class RequesterFactory extends Factory
         return [
             'name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
+            'extra_information' => ['Total Credits' => rand(10, 65433)],
+            'address_line_1' => $this->faker->streetAddress(),
+            'city' => $this->faker->city(),
+            'state' => $this->faker->state(),
+            'postal_code' => $this->faker->postcode(),
+            'country' => $this->faker->countryCode(),
             'registration_date' => now()->subMinutes(rand(5 * 1440, 15 * 1440)),
         ];
     }

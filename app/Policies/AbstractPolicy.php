@@ -31,7 +31,7 @@ class AbstractPolicy
         }
 
         /*
-         * The incident logs only appear on related resource relationship data
+         * The resource only appear on related resource relationship data
          * and never as the main resource Incident Log being managed.
          */
         if (resolve(NovaRequest::class)->isResourceIndexRequest() &&

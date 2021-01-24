@@ -56,8 +56,7 @@ class IncidentPolicy extends AbstractPolicy
     public function update(User $user, Incident $incident)
     {
         return optional($incident->user)->id == $user->id ||
-               $user->isAdmin() ||
-               $user->isCoordinator();
+               $user->isAdmin();
     }
 
     /**
@@ -94,5 +93,17 @@ class IncidentPolicy extends AbstractPolicy
     public function forceDelete(User $user, Incident $incident)
     {
         return $user->isAdmin();
+    }
+
+    /**
+     * Determine whether the user can attach any tags to the podcast.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Podcast  $podcast
+     * @return mixed
+     */
+    public function attachAnyTag(User $user, Incident $incident)
+    {
+        return false;
     }
 }

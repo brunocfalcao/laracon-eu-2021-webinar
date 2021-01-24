@@ -32,6 +32,11 @@ class User extends Authenticatable
         return $this->profile->name == 'Admin';
     }
 
+    public function isOperator()
+    {
+        return $this->profile->name == 'Operator';
+    }
+
     public function isCoordinator()
     {
         return $this->profile->name == 'Coordinator';

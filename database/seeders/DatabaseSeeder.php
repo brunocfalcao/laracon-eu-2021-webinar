@@ -108,7 +108,7 @@ class DatabaseSeeder extends Seeder
          * Create Incidents from the past 180 days. Each day will have a
          * random number of incidents, and a random workflow state (1 to 7).
          **/
-        $daysAgo = 10;
+        $daysAgo = 90;
 
         for ($i = $daysAgo; $i >= 0; $i--) {
             $incident = $this->newIncident($i, true, rand(1, 10))

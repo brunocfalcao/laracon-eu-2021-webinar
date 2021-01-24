@@ -2,12 +2,14 @@
 
 namespace App\Nova;
 
-use Illuminate\Http\Request;
-use Laravel\Nova\Fields\BelongsToMany;
+use App\Nova\Incident;
 use Laravel\Nova\Fields\ID;
+use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\BelongsToMany;
+use Laravel\Nova\Http\Requests\NovaRequest;
 
-class Tag extends AbstractResource
+class Tag extends Resource
 {
     /**
      * The model the resource corresponds to.
@@ -29,7 +31,7 @@ class Tag extends AbstractResource
      * @var array
      */
     public static $search = [
-        'name',
+        'id', 'name'
     ];
 
     /**
@@ -46,7 +48,10 @@ class Tag extends AbstractResource
             Text::make('Name', 'name')
                 ->rules('required'),
 
+
             BelongsToMany::make('Incidents', 'incidents', Incident::class),
+
+
         ];
     }
 

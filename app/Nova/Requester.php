@@ -2,7 +2,6 @@
 
 namespace App\Nova;
 
-use Brunocfalcao\FaText\FaText;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Country;
 use Laravel\Nova\Fields\Date;
@@ -49,8 +48,7 @@ class Requester extends AbstractResource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            FaText::make('Name')
-                ->icon('fas fa-user')
+            Text::make('Name')
                 ->rules('required'),
 
             Text::make('Email')

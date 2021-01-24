@@ -19,7 +19,7 @@ class Incident extends Model
      */
     protected static function booted()
     {
-        //static::addGlobalScope(new IncidentsScope());
+        static::addGlobalScope(new IncidentsScope());
     }
 
     public function tags()

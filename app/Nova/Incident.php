@@ -2,21 +2,22 @@
 
 namespace App\Nova;
 
-use App\Models\Status as StatusModel;
-use App\Nova\Actions\AssignIncidentToOperatorAction;
-use App\Nova\Filters\IncidentCategoryFilter;
-use App\Nova\Filters\IncidentStatusFilter;
-use App\Nova\Lenses\MyIncidents;
-use Brunocfalcao\MyTotalIncidentsAsyncCard\MyTotalIncidentsAsyncCard;
-use Brunocfalcao\MyTotalIncidentsCard\MyTotalIncidentsCard;
-use Illuminate\Http\Request;
-use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\BelongsToMany;
-use Laravel\Nova\Fields\HasMany;
+use App\Nova\Tag;
 use Laravel\Nova\Fields\ID;
+use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
+use Brunocfalcao\FaText\FaText;
+use App\Nova\Lenses\MyIncidents;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Fields\BelongsTo;
+use App\Nova\Lenses\MyIncidentsOpen;
+use App\Models\Status as StatusModel;
+use Laravel\Nova\Fields\BelongsToMany;
+use App\Nova\Filters\IncidentStatusFilter;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use App\Nova\Filters\IncidentCategoryFilter;
+use Brunocfalcao\MyIncidentsCard\MyIncidentsCard;
 
 class Incident extends AbstractResource
 {
@@ -77,7 +78,8 @@ class Incident extends AbstractResource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            Text::make('Title', 'title')
+            FaText::make('Title2', 'title')
+                ->icon('fab fa-laravel')
                 ->rules('required'),
 
             Textarea::make('Description', 'description'),
@@ -101,7 +103,6 @@ class Incident extends AbstractResource
             HasMany::make('Log', 'logs', IncidentLog::class),
 
             BelongsToMany::make('Tags', 'tags', Tag::class),
-
         ];
     }
 
@@ -114,10 +115,7 @@ class Incident extends AbstractResource
     public function cards(Request $request)
     {
         return [
-            (new MyTotalIncidentsCard())
-                ->withMeta(['total' => Incident::assignedToMyself()->count()]),
-
-            new MyTotalIncidentsAsyncCard(),
+            new MyIncidentsCard()
         ];
     }
 
@@ -145,6 +143,7 @@ class Incident extends AbstractResource
     {
         return [
             new MyIncidents(),
+            new MyIncidentsOpen(),
         ];
     }
 
@@ -157,7 +156,7 @@ class Incident extends AbstractResource
     public function actions(Request $request)
     {
         return [
-            new AssignIncidentToOperatorAction(),
+            //
         ];
     }
 }

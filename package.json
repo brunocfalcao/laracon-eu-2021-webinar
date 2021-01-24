@@ -27,7 +27,11 @@
         "build-my-total-incidents-async-card": "cd nova-components/MyTotalIncidentsAsyncCard && npm run dev",
         "build-my-total-incidents-async-card-prod": "cd nova-components/MyTotalIncidentsAsyncCard && npm run prod",
         "build-universal-blade-tool": "cd nova-components/UniversalBladeTool && npm run dev",
-        "build-universal-blade-tool-prod": "cd nova-components/UniversalBladeTool && npm run prod"
+        "build-universal-blade-tool-prod": "cd nova-components/UniversalBladeTool && npm run prod",
+        "build-my-incidents-card": "cd nova-components/MyIncidentsCard && npm run dev",
+        "build-my-incidents-card-prod": "cd nova-components/MyIncidentsCard && npm run prod",
+        "build-blade-view": "cd nova-components/BladeView && npm run dev",
+        "build-blade-view-prod": "cd nova-components/BladeView && npm run prod"
     },
     "devDependencies": {
         "axios": "^0.19",
